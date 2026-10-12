@@ -58,10 +58,15 @@ public struct Tracker: Sendable {
         guard delta > 0 || delta < -2 else { return nil }
 
         // Moving on must beat staying put, so a chance match while improvising
-        // doesn't drag the reader forward. Big moves need more words instead.
+        // doesn't drag the reader forward. Big moves need more words instead,
+        // except going back within the sentence being read or the one before:
+        // the most common re-read, which must be caught before the reader is
+        // back where they stopped.
+        let nearRereadStart = script.sentenceStart(at: max(0, script.sentenceStart(at: max(0, position - 1)) - 1))
         switch delta {
         case 1...4: guard best.score >= 0.95, best.gain >= 1 else { return nil }
         case 5...15: guard best.score >= 1.8, best.gain >= 1 else { return nil }
+        case ..<0 where best.target >= nearRereadStart: guard best.score >= 2.2 else { return nil }
         default: guard best.score >= 2.6 else { return nil }
         }
 
@@ -98,6 +103,7 @@ public struct Tracker: Sendable {
         switch delta {
         case -2...15: 0
         case 16...: min(1, 0.01 * Double(delta - 15))
+        case -40 ..< -2: 0.2 + 0.01 * Double(-delta)
         default: min(1.5, 0.4 + 0.01 * Double(-delta))
         }
     }

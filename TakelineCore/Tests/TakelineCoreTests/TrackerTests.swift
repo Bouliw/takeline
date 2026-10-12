@@ -75,6 +75,17 @@ import Testing
         #expect(tracker.position == index(of: "produire", in: script) + 1)
     }
 
+    @Test func noticesARestartedSentenceBeforeTheReaderCatchesUp() {
+        var tracker = Tracker(script: script)
+        tracker.jump(to: index(of: "Premièrement", in: script))
+        var heard: [String] = []
+        read("Premièrement, la quasi-totalité de leurs fours sont électriques, ce qui", with: &tracker, heard: &heard)
+        let moves = read("Premièrement, la quasi-totalité de leurs fours", with: &tracker, heard: &heard)
+        let wentBack = moves.contains { $0.isBackward }
+        #expect(wentBack)
+        #expect(tracker.position == index(of: "fours", in: script) + 1)
+    }
+
     @Test func stepsOverCues() {
         var tracker = Tracker(script: script)
         tracker.jump(to: index(of: "beaucoup moins cher", in: script))
