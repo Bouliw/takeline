@@ -70,6 +70,7 @@ class ExternalDisplayController {
         panel.hasShadow = false
         panel.level = .screenSaver
         panel.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
+        panel.sharingType = settings.hideFromScreenShare ? .none : .readOnly
         panel.contentView = hostingView
         panel.setFrame(screenFrame, display: true)
         panel.orderFront(nil)
