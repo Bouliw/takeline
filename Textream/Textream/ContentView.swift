@@ -573,7 +573,7 @@ Happy recording! [wave]
                                     .fill(.orange)
                                     .frame(width: 6, height: 6)
                             }
-                            Text(service.currentFileURL?.deletingPathExtension().lastPathComponent ?? "Untitled")
+                            Text(service.currentFileURL?.deletingPathExtension().lastPathComponent ?? String(localized: "Untitled"))
                                 .font(.system(size: 11, weight: .medium))
                                 .lineLimit(1)
                         }

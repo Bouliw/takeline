@@ -1,0 +1,39 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "CFBundleDisplayName": {
+      "shouldTranslate": false
+    },
+    "NSLocalNetworkUsageDescription": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Takeline permet à vos propres appareils du réseau local d’afficher ou de piloter le prompteur, avec un code d’accès."
+          }
+        }
+      }
+    },
+    "NSMicrophoneUsageDescription": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Takeline écoute votre voix pour suivre votre script. Le son reste sur ce Mac."
+          }
+        }
+      }
+    },
+    "NSSpeechRecognitionUsageDescription": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Takeline reconnaît votre voix uniquement sur cet appareil pour suivre votre lecture. Le son n’en sort jamais."
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

@@ -1,0 +1,2292 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "": {},
+    "\"Previous paragraph\", \"from the top\", \"pause\", \"bigger text\", in French or English.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« Paragraphe précédent », « reprends au début », « pause », « texte plus gros », en français ou en anglais."
+          }
+        }
+      }
+    },
+    "%lld": {},
+    "%lld words per minute": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld mots par minute"
+          }
+        }
+      }
+    },
+    "%lld%%": {},
+    "%lldpx": {},
+    "%lld×%lld": {},
+    "1 second": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 seconde"
+          }
+        }
+      }
+    },
+    "3 seconds": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3 secondes"
+          }
+        }
+      }
+    },
+    "5 seconds": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5 secondes"
+          }
+        }
+      }
+    },
+    "A draggable window you can place anywhere. Always on top.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une fenêtre que vous placez où vous voulez. Toujours au premier plan."
+          }
+        }
+      }
+    },
+    "A free, open-source teleprompter that follows your voice, in French and English, entirely on your Mac.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un prompteur gratuit et open source qui suit votre voix, en français et en anglais, entièrement sur votre Mac."
+          }
+        }
+      }
+    },
+    "About Takeline": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À propos de Takeline"
+          }
+        }
+      }
+    },
+    "Add Page": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouvelle page"
+          }
+        }
+      }
+    },
+    "Advanced": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avancé"
+          }
+        }
+      }
+    },
+    "Ag": {},
+    "Always listen in": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toujours écouter en"
+          }
+        }
+      }
+    },
+    "Amount": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quantité"
+          }
+        }
+      }
+    },
+    "Anchored below the notch at the top of your screen.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ancré sous l’encoche, en haut de votre écran."
+          }
+        }
+      }
+    },
+    "Appearance": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apparence"
+          }
+        }
+      }
+    },
+    "Apple's model is still downloading. Meanwhile, clear phrases and re-reading still work.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le modèle d’Apple est encore en cours de téléchargement. En attendant, les phrases claires et la relecture fonctionnent."
+          }
+        }
+      }
+    },
+    "Apple's on-device model decides whether a phrase was meant for the prompter or for your audience.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le modèle d’Apple, sur votre Mac, décide si une phrase s’adressait au prompteur ou à votre public."
+          }
+        }
+      }
+    },
+    "Apple's recognition, on this Mac only. Your voice never leaves it.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La reconnaissance d’Apple, uniquement sur ce Mac. Votre voix n’en sort jamais."
+          }
+        }
+      }
+    },
+    "Ask for the access code": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Demander le code d’accès"
+          }
+        }
+      }
+    },
+    "Asks GitHub whether a new version exists. Takeline makes no other network request.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Demande à GitHub si une nouvelle version existe. Takeline ne fait aucune autre requête réseau."
+          }
+        }
+      }
+    },
+    "At the end of each reading, saves the script and its takes to a file an editing tool such as Roughcut can read.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À la fin de chaque lecture, enregistre le script et ses prises dans un fichier qu’un outil de montage comme Roughcut sait lire."
+          }
+        }
+      }
+    },
+    "Audio engine failed: %@": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le moteur audio a échoué : %@"
+          }
+        }
+      }
+    },
+    "Audio input format is unsupported.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le format de l’entrée audio n’est pas pris en charge."
+          }
+        }
+      }
+    },
+    "Audio input is unavailable.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’entrée audio n’est pas disponible."
+          }
+        }
+      }
+    },
+    "Auto Next Page": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Page suivante automatique"
+          }
+        }
+      }
+    },
+    "Auto-scrolls at a constant speed. No microphone needed.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Défile à vitesse constante. Pas besoin de micro."
+          }
+        }
+      }
+    },
+    "Automatic language": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Langue automatique"
+          }
+        }
+      }
+    },
+    "Automatically advance to the next page after a countdown.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Passe à la page suivante après un compte à rebours."
+          }
+        }
+      }
+    },
+    "Based on Textream by Fatih Kadir Akın": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "D’après Textream, de Fatih Kadir Akın"
+          }
+        }
+      }
+    },
+    "Blue": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bleu"
+          }
+        }
+      }
+    },
+    "Both": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les deux"
+          }
+        }
+      }
+    },
+    "Bright": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vif"
+          }
+        }
+      }
+    },
+    "Cancel": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuler"
+          }
+        }
+      }
+    },
+    "Centered": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Centré"
+          }
+        }
+      }
+    },
+    "Check for Updates…": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechercher les mises à jour…"
+          }
+        }
+      }
+    },
+    "Check for updates at launch": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechercher les mises à jour au lancement"
+          }
+        }
+      }
+    },
+    "Choose…": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisir…"
+          }
+        }
+      }
+    },
+    "Classic": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Classique"
+          }
+        }
+      }
+    },
+    "Conversion Required": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conversion nécessaire"
+          }
+        }
+      }
+    },
+    "Countdown": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compte à rebours"
+          }
+        }
+      }
+    },
+    "Cue Brightness": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Luminosité des indications"
+          }
+        }
+      }
+    },
+    "Cue Color": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couleur des indications"
+          }
+        }
+      }
+    },
+    "Delete Page": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer la page"
+          }
+        }
+      }
+    },
+    "Detects French, English or both in each script. A script that mixes them is followed in both.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Détecte le français, l’anglais ou les deux dans chaque script. Un script qui les mélange est suivi dans les deux langues."
+          }
+        }
+      }
+    },
+    "Dim": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atténué"
+          }
+        }
+      }
+    },
+    "Dimensions": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dimensions"
+          }
+        }
+      }
+    },
+    "Director": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Director"
+          }
+        }
+      }
+    },
+    "Director Mode": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mode Director"
+          }
+        }
+      }
+    },
+    "Director Mode lets a remote person control your teleprompter script in real-time via a web browser. The editor will be disabled while active.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le mode Director permet à une autre personne de piloter votre script en direct depuis un navigateur. L’éditeur est désactivé pendant ce temps."
+          }
+        }
+      }
+    },
+    "Discard": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ne pas enregistrer"
+          }
+        }
+      }
+    },
+    "Dismiss language suggestion": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ignorer la suggestion de langue"
+          }
+        }
+      }
+    },
+    "Display": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Écran"
+          }
+        }
+      }
+    },
+    "Display a running timer while the teleprompter is active.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Affiche un chronomètre pendant que le prompteur est actif."
+          }
+        }
+      }
+    },
+    "Display recently recognized words while using Word Tracking.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Affiche les derniers mots reconnus en suivi mot à mot."
+          }
+        }
+      }
+    },
+    "Done": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        }
+      }
+    },
+    "Done!": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminé !"
+          }
+        }
+      }
+    },
+    "Download": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Télécharger"
+          }
+        }
+      }
+    },
+    "Downloads Apple's speech model for this language, once.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Télécharge une fois le modèle vocal d’Apple pour cette langue."
+          }
+        }
+      }
+    },
+    "Drop a script: PowerPoint, Word, Markdown or text": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déposez un script : PowerPoint, Word, Markdown ou texte"
+          }
+        }
+      }
+    },
+    "Dyslexia": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dyslexie"
+          }
+        }
+      }
+    },
+    "Elapsed Time": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Temps écoulé"
+          }
+        }
+      }
+    },
+    "Enable Director Mode": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activer le mode Director"
+          }
+        }
+      }
+    },
+    "Enable Remote Connection": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activer l’affichage à distance"
+          }
+        }
+      }
+    },
+    "English": {},
+    "Estimated length of the video at 150 words per minute. Takeline learns your own pace as you read.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Durée estimée de la vidéo à 150 mots par minute. Takeline apprend votre propre débit au fil de vos lectures."
+          }
+        }
+      }
+    },
+    "Estimated length of the video at your pace: %lld words per minute.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Durée estimée de la vidéo à votre débit : %lld mots par minute."
+          }
+        }
+      }
+    },
+    "External": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Externe"
+          }
+        }
+      }
+    },
+    "Failed to extract notes: %@": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible d’extraire les notes : %@"
+          }
+        }
+      }
+    },
+    "Failed to open file": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible d’ouvrir le fichier"
+          }
+        }
+      }
+    },
+    "Failed to save file": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible d’enregistrer le fichier"
+          }
+        }
+      }
+    },
+    "Faster": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plus rapide"
+          }
+        }
+      }
+    },
+    "First page": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Première page"
+          }
+        }
+      }
+    },
+    "Fixed Display": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Écran fixe"
+          }
+        }
+      }
+    },
+    "Flipped left-to-right. Standard for prompter mirror rigs.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inversé de gauche à droite. Le réglage standard pour les miroirs de prompteur."
+          }
+        }
+      }
+    },
+    "Flipped on both axes (rotated 180°).": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inversé sur les deux axes (rotation de 180°)."
+          }
+        }
+      }
+    },
+    "Flipped top-to-bottom.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inversé de haut en bas."
+          }
+        }
+      }
+    },
+    "Floating Window": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fenêtre flottante"
+          }
+        }
+      }
+    },
+    "Follow Cursor": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suivre le curseur"
+          }
+        }
+      }
+    },
+    "Follow Mouse": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suivre la souris"
+          }
+        }
+      }
+    },
+    "Font": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Police"
+          }
+        }
+      }
+    },
+    "For Keynote or Google Slides,\nexport as PPTX first.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour Keynote ou Google Slides,\nexportez d’abord en PPTX."
+          }
+        }
+      }
+    },
+    "Français": {},
+    "Fullscreen": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plein écran"
+          }
+        }
+      }
+    },
+    "Fullscreen teleprompter on the selected display.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prompteur en plein écran sur l’écran choisi."
+          }
+        }
+      }
+    },
+    "Fullscreen teleprompter on the selected display. Press Esc to stop.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prompteur en plein écran sur l’écran choisi. Appuyez sur Échap pour arrêter."
+          }
+        }
+      }
+    },
+    "GitHub": {},
+    "Glass Effect": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Effet verre"
+          }
+        }
+      }
+    },
+    "Green": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vert"
+          }
+        }
+      }
+    },
+    "Guidance": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Guidage"
+          }
+        }
+      }
+    },
+    "Height": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hauteur"
+          }
+        }
+      }
+    },
+    "Hide from Screen Sharing": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Masquer au partage d’écran"
+          }
+        }
+      }
+    },
+    "Hide the overlay from screen recordings and video calls.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Masque le prompteur dans les enregistrements d’écran et les appels vidéo."
+          }
+        }
+      }
+    },
+    "Highlight Color": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couleur de surlignage"
+          }
+        }
+      }
+    },
+    "Horizontal": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Horizontal"
+          }
+        }
+      }
+    },
+    "Horizontally flipped for use with a prompter mirror rig.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inversé horizontalement, pour un miroir de prompteur."
+          }
+        }
+      }
+    },
+    "Import Error": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erreur d’importation"
+          }
+        }
+      }
+    },
+    "Install": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Installer"
+          }
+        }
+      }
+    },
+    "Installed": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Installé"
+          }
+        }
+      }
+    },
+    "Instant": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Immédiat"
+          }
+        }
+      }
+    },
+    "Interface language": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Langue de l’interface"
+          }
+        }
+      }
+    },
+    "Jump to page": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aller à la page"
+          }
+        }
+      }
+    },
+    "Keep Screen Awake": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Garder l’écran allumé"
+          }
+        }
+      }
+    },
+    "Keynote files can't be imported directly": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les fichiers Keynote ne peuvent pas être importés directement"
+          }
+        }
+      }
+    },
+    "Keynote files can't be imported directly. Please export your Keynote presentation as PowerPoint (.pptx) first, then drop the exported file here.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les fichiers Keynote ne peuvent pas être importés directement. Exportez d’abord votre présentation en PowerPoint (.pptx), puis déposez le fichier exporté ici."
+          }
+        }
+      }
+    },
+    "Language from the script": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Langue d’après le script"
+          }
+        }
+      }
+    },
+    "Later": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plus tard"
+          }
+        }
+      }
+    },
+    "Learned from your sessions with word tracking, to estimate the length of your videos.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appris de vos lectures en suivi mot à mot, pour estimer la durée de vos vidéos."
+          }
+        }
+      }
+    },
+    "Less transparent": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moins transparent"
+          }
+        }
+      }
+    },
+    "Local network only": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réseau local uniquement"
+          }
+        }
+      }
+    },
+    "Low": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faible"
+          }
+        }
+      }
+    },
+    "Makes the overlay see-through so desktop content shows through.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rend le prompteur transparent pour laisser voir le bureau."
+          }
+        }
+      }
+    },
+    "Medium": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moyen"
+          }
+        }
+      }
+    },
+    "Microphone": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Micro"
+          }
+        }
+      }
+    },
+    "Microphone Unavailable": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Micro indisponible"
+          }
+        }
+      }
+    },
+    "Microphone access denied. Open System Settings → Privacy & Security → Microphone to allow Takeline.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accès au micro refusé. Ouvrez Réglages Système → Confidentialité et sécurité → Micro pour autoriser Takeline."
+          }
+        }
+      }
+    },
+    "Microphone authorization is unavailable.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’autorisation du micro n’est pas disponible."
+          }
+        }
+      }
+    },
+    "Mirror": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Miroir"
+          }
+        }
+      }
+    },
+    "Mirror Axis": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Axe du miroir"
+          }
+        }
+      }
+    },
+    "Mono": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mono"
+          }
+        }
+      }
+    },
+    "More transparent": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plus transparent"
+          }
+        }
+      }
+    },
+    "Mute microphone": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couper le micro"
+          }
+        }
+      }
+    },
+    "Near Top": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Près du haut"
+          }
+        }
+      }
+    },
+    "Near Top keeps the previous line visible above the active line.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Près du haut garde la ligne précédente visible au-dessus de la ligne en cours."
+          }
+        }
+      }
+    },
+    "Next Page": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Page suivante"
+          }
+        }
+      }
+    },
+    "Next page": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Page suivante"
+          }
+        }
+      }
+    },
+    "No external display output.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun affichage sur un écran externe."
+          }
+        }
+      }
+    },
+    "No presenter notes found in this presentation.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune note de l’orateur dans cette présentation."
+          }
+        }
+      }
+    },
+    "Not available on this Mac": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indisponible sur ce Mac"
+          }
+        }
+      }
+    },
+    "Not available on this Mac. Clear phrases and re-reading still work.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indisponible sur ce Mac. Les phrases claires et la relecture fonctionnent quand même."
+          }
+        }
+      }
+    },
+    "Not learned yet": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pas encore appris"
+          }
+        }
+      }
+    },
+    "OK": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        }
+      }
+    },
+    "Off": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Désactivé"
+          }
+        }
+      }
+    },
+    "Opacity": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opacité"
+          }
+        }
+      }
+    },
+    "Open File or Presentation…": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir un fichier ou une présentation…"
+          }
+        }
+      }
+    },
+    "Open Settings": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir les réglages"
+          }
+        }
+      }
+    },
+    "Orange": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orange"
+          }
+        }
+      }
+    },
+    "Original idea by Semih Kışlar": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Idée originale de Semih Kışlar"
+          }
+        }
+      }
+    },
+    "Page": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Page"
+          }
+        }
+      }
+    },
+    "Pages": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pages"
+          }
+        }
+      }
+    },
+    "Pagination": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pagination"
+          }
+        }
+      }
+    },
+    "Pause": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pause"
+          }
+        }
+      }
+    },
+    "Pink": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rose"
+          }
+        }
+      }
+    },
+    "Pinned to Notch": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sous l’encoche"
+          }
+        }
+      }
+    },
+    "Please export your Keynote presentation as PowerPoint (.pptx) first:\n\nIn Keynote: File → Export To → PowerPoint": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportez d’abord votre présentation Keynote en PowerPoint (.pptx) :\n\nDans Keynote : Fichier → Exporter vers → PowerPoint"
+          }
+        }
+      }
+    },
+    "Port": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Port"
+          }
+        }
+      }
+    },
+    "Press Esc to stop the teleprompter.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appuyez sur Échap pour arrêter le prompteur."
+          }
+        }
+      }
+    },
+    "Prevent display and system sleep while the teleprompter is active.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Empêche la mise en veille pendant que le prompteur est actif."
+          }
+        }
+      }
+    },
+    "Reading": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lecture"
+          }
+        }
+      }
+    },
+    "Reading Position": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Position de lecture"
+          }
+        }
+      }
+    },
+    "Reading from director…": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lecture pilotée par le Director…"
+          }
+        }
+      }
+    },
+    "Refresh": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actualiser"
+          }
+        }
+      }
+    },
+    "Refuses devices outside your home or office network.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refuse les appareils extérieurs à votre réseau (maison ou bureau)."
+          }
+        }
+      }
+    },
+    "Remote": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À distance"
+          }
+        }
+      }
+    },
+    "Remote view and Director": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Affichage à distance et Director"
+          }
+        }
+      }
+    },
+    "Reset": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réinitialiser"
+          }
+        }
+      }
+    },
+    "Reset All": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout réinitialiser"
+          }
+        }
+      }
+    },
+    "Reset All Settings?": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réinitialiser tous les réglages ?"
+          }
+        }
+      }
+    },
+    "Restart": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Redémarrer"
+          }
+        }
+      }
+    },
+    "Restart required after change": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Redémarrage nécessaire après modification"
+          }
+        }
+      }
+    },
+    "Resume": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reprendre"
+          }
+        }
+      }
+    },
+    "Retake": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reprise"
+          }
+        }
+      }
+    },
+    "Retakes": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reprises"
+          }
+        }
+      }
+    },
+    "Retry": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réessayer"
+          }
+        }
+      }
+    },
+    "Same as macOS": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comme macOS"
+          }
+        }
+      }
+    },
+    "Sans": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sans"
+          }
+        }
+      }
+    },
+    "Save": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistrer"
+          }
+        }
+      }
+    },
+    "Save As…": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistrer sous…"
+          }
+        }
+      }
+    },
+    "Save sessions": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistrer les sessions"
+          }
+        }
+      }
+    },
+    "Say \"on la refait\", \"take two\" or read a sentence again: the text goes back to the start of the sentence and the retake is noted.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dites « on la refait », « take two » ou relisez une phrase : le texte revient au début de la phrase et la reprise est notée."
+          }
+        }
+      }
+    },
+    "Scan the QR code or open the URL with your iPhone, Android or TV browser on the same Wi-Fi network.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scannez le QR code ou ouvrez l’adresse dans le navigateur de votre iPhone, Android ou TV, sur le même Wi-Fi."
+          }
+        }
+      }
+    },
+    "Scroll Speed": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitesse de défilement"
+          }
+        }
+      }
+    },
+    "Scrolls while you speak, pauses when you're silent.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Défile quand vous parlez, s’arrête quand vous vous taisez."
+          }
+        }
+      }
+    },
+    "Separate source line breaks with extra space and three centered dots.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sépare les retours à la ligne du texte par un espace et trois points centrés."
+          }
+        }
+      }
+    },
+    "Serif": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serif"
+          }
+        }
+      }
+    },
+    "Settings": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglages"
+          }
+        }
+      }
+    },
+    "Settings…": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglages…"
+          }
+        }
+      }
+    },
+    "Show": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afficher"
+          }
+        }
+      }
+    },
+    "Show Last Spoken Words": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afficher les derniers mots prononcés"
+          }
+        }
+      }
+    },
+    "Show Paragraph Dividers": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afficher les séparateurs de paragraphe"
+          }
+        }
+      }
+    },
+    "Show the teleprompter on an external display or Sidecar iPad.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Affiche le prompteur sur un écran externe ou un iPad en Sidecar."
+          }
+        }
+      }
+    },
+    "Size": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taille"
+          }
+        }
+      }
+    },
+    "Slower": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plus lent"
+          }
+        }
+      }
+    },
+    "Speech is currently set to %@.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La reconnaissance est réglée sur %@."
+          }
+        }
+      }
+    },
+    "Speech recognition": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reconnaissance vocale"
+          }
+        }
+      }
+    },
+    "Start Prompter": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lancer le prompteur"
+          }
+        }
+      }
+    },
+    "Stop": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrêter"
+          }
+        }
+      }
+    },
+    "Switch speech recognition to %@": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Passer la reconnaissance en %@"
+          }
+        }
+      }
+    },
+    "System Default": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Par défaut du système"
+          }
+        }
+      }
+    },
+    "Takeline": {},
+    "Takeline %@ is available. You are currently running %@.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Takeline %1$@ est disponible. Vous utilisez actuellement la version %2$@."
+          }
+        }
+      }
+    },
+    "Takeline %@ is the latest version.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Takeline %@ est la dernière version."
+          }
+        }
+      }
+    },
+    "Takeline Help": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aide de Takeline"
+          }
+        }
+      }
+    },
+    "Takeline needs to restart to change its language.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Takeline doit redémarrer pour changer de langue."
+          }
+        }
+      }
+    },
+    "Tap a page to jump": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touchez une page pour y aller"
+          }
+        }
+      }
+    },
+    "Target Display": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Écran cible"
+          }
+        }
+      }
+    },
+    "Teleprompter": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prompteur"
+          }
+        }
+      }
+    },
+    "The QR code contains it. Without it, anyone who can reach your Mac can read your script, and Director can change it.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le QR code le contient. Sans lui, n’importe qui pouvant joindre votre Mac peut lire votre script, et le mode Director peut le modifier."
+          }
+        }
+      }
+    },
+    "The notch moves to whichever display your mouse is on.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’encoche passe sur l’écran où se trouve votre souris."
+          }
+        }
+      }
+    },
+    "The notch stays on the selected display.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’encoche reste sur l’écran choisi."
+          }
+        }
+      }
+    },
+    "The window follows your cursor and sticks to its bottom-right.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La fenêtre suit votre curseur, accrochée en bas à droite."
+          }
+        }
+      }
+    },
+    "This text looks like %@.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce texte semble être en %@."
+          }
+        }
+      }
+    },
+    "This will restore all settings to their defaults.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tous les réglages reprendront leur valeur par défaut."
+          }
+        }
+      }
+    },
+    "Tracks each word you say and highlights it in real time.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suit chaque mot que vous dites et le surligne en direct."
+          }
+        }
+      }
+    },
+    "Transparency": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transparence"
+          }
+        }
+      }
+    },
+    "Turn on Apple Intelligence in System Settings to use it. Meanwhile, clear phrases and re-reading still work.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activez Apple Intelligence dans Réglages Système pour l’utiliser. En attendant, les phrases claires et la relecture fonctionnent."
+          }
+        }
+      }
+    },
+    "Understand the context": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comprendre le contexte"
+          }
+        }
+      }
+    },
+    "Unmute microphone": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réactiver le micro"
+          }
+        }
+      }
+    },
+    "Unsupported file format. Please drop a .pptx or .key file.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Format non pris en charge. Déposez un fichier .pptx ou .key."
+          }
+        }
+      }
+    },
+    "Unsupported file. Drop a PowerPoint (.pptx), Word (.docx), Markdown (.md) or text (.txt) file.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fichier non pris en charge. Déposez un fichier PowerPoint (.pptx), Word (.docx), Markdown (.md) ou texte (.txt)."
+          }
+        }
+      }
+    },
+    "Untitled": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sans titre"
+          }
+        }
+      }
+    },
+    "Update Available": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mise à jour disponible"
+          }
+        }
+      }
+    },
+    "Update Check Failed": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Échec de la recherche de mises à jour"
+          }
+        }
+      }
+    },
+    "Use %@": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utiliser %@"
+          }
+        }
+      }
+    },
+    "Uses ports %@ (HTTP) and %@ (WebSocket).": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utilise les ports %1$@ (HTTP) et %2$@ (WebSocket)."
+          }
+        }
+      }
+    },
+    "Version %@": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version %@"
+          }
+        }
+      }
+    },
+    "Vertical": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vertical"
+          }
+        }
+      }
+    },
+    "Voice": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voix"
+          }
+        }
+      }
+    },
+    "Voice commands": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commandes vocales"
+          }
+        }
+      }
+    },
+    "Voice-Activated": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À la voix"
+          }
+        }
+      }
+    },
+    "Waiting for director to send script…": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En attente du script du Director…"
+          }
+        }
+      }
+    },
+    "Waiting for macOS (it holds downloads on metered networks)": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En attente de macOS (il suspend les téléchargements sur les réseaux limités)"
+          }
+        }
+      }
+    },
+    "White": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blanc"
+          }
+        }
+      }
+    },
+    "Width": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Largeur"
+          }
+        }
+      }
+    },
+    "Word Tracking": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mot à mot"
+          }
+        }
+      }
+    },
+    "Word tracking is forced when the director starts reading.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le suivi mot à mot est forcé quand le Director lance la lecture."
+          }
+        }
+      }
+    },
+    "Yellow": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jaune"
+          }
+        }
+      }
+    },
+    "You have unsaved changes": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vos modifications ne sont pas enregistrées"
+          }
+        }
+      }
+    },
+    "You're Up to Date": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Takeline est à jour"
+          }
+        }
+      }
+    },
+    "Your changes will be lost if you don't save them.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vos modifications seront perdues si vous ne les enregistrez pas."
+          }
+        }
+      }
+    },
+    "Your reading pace": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre débit de lecture"
+          }
+        }
+      }
+    },
+    "welcomeText": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Welcome to Takeline! Your teleprompter sits right below your MacBook's notch and follows your voice, on this Mac only. [smile]\n\nRead this aloud: the highlight follows you word by word. Skip a line and it jumps with you. Improvise for a moment and it waits. [pause]\n\nStumbled? Say \"take two\" or \"on la refait\", or simply read the sentence again: the text goes back to the start of the sentence, and the retake is noted for your edit. [nod]\n\nYou can also say \"previous paragraph\", \"from the top\", \"pause\" or \"bigger text\".\n\nHappy recording! [wave]"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bienvenue dans Takeline ! Votre prompteur se place juste sous l'encoche de votre MacBook et suit votre voix, uniquement sur ce Mac. [smile]\n\nLisez ce texte à voix haute : le surlignage vous suit mot à mot. Sautez une ligne, il saute avec vous. Improvisez un moment, il vous attend. [pause]\n\nUne erreur ? Dites « on la refait » ou « take two », ou relisez simplement la phrase : le texte revient au début de la phrase, et la reprise est notée pour votre montage. [nod]\n\nVous pouvez aussi dire « paragraphe précédent », « reprends au début », « pause » ou « texte plus gros ».\n\nBon tournage ! [wave]"
+          }
+        }
+      }
+    },
+    "≈ %@": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %@"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
