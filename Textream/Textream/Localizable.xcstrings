@@ -86,6 +86,16 @@
         }
       }
     },
+    "Access code": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Code d’accès"
+          }
+        }
+      }
+    },
     "Add Page": {
       "localizations": {
         "fr": {
@@ -433,6 +443,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Détecte le français, l’anglais ou les deux dans chaque script. Un script qui les mélange est suivi dans les deux langues."
+          }
+        }
+      }
+    },
+    "Devices that used the old code will need the new QR code.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les appareils qui utilisaient l’ancien code devront scanner le nouveau QR code."
           }
         }
       }
@@ -1196,6 +1216,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Près du haut garde la ligne précédente visible au-dessus de la ligne en cours."
+          }
+        }
+      }
+    },
+    "New code": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouveau code"
           }
         }
       }

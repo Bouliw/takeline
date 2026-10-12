@@ -6,6 +6,7 @@ struct AdvancedSettingsView: View {
 
     /// "system", "en" or "fr": the app's own language override, if any.
     @State private var interfaceLanguage = Self.languageOverride
+    @State private var accessCode = ""
     private static let launchLanguage = languageOverride
 
     private static var languageOverride: String {
@@ -35,7 +36,7 @@ struct AdvancedSettingsView: View {
                                 .font(.system(size: 11))
                                 .foregroundStyle(.secondary)
                             Spacer()
-                            Button(String(localized: "Restart"), action: Self.relaunch)
+                            Button(String(localized: "Restart")) { Self.relaunch() }
                                 .controlSize(.small)
                         }
                     }
@@ -51,6 +52,22 @@ struct AdvancedSettingsView: View {
                                String(localized: "The QR code contains it. Without it, anyone who can reach your Mac can read your script, and Director can change it."))
                     }
                     .toggleStyle(.checkbox)
+                    if settings.remoteRequiresCode && (settings.browserServerEnabled || settings.directorModeEnabled) {
+                        HStack(spacing: 8) {
+                            Text(String(localized: "Access code"))
+                                .font(.system(size: 12))
+                                .foregroundStyle(.secondary)
+                            Text(accessCode)
+                                .font(.system(size: 13, weight: .semibold, design: .monospaced))
+                                .textSelection(.enabled)
+                            Spacer()
+                            Button(String(localized: "New code")) { accessCode = RemoteAccess.regenerate() }
+                                .controlSize(.small)
+                                .help(String(localized: "Devices that used the old code will need the new QR code."))
+                        }
+                        .padding(.leading, 20)
+                        .onAppear { accessCode = RemoteAccess.code }
+                    }
                     Toggle(isOn: $settings.remoteLocalNetworkOnly) {
                         detail(String(localized: "Local network only"),
                                String(localized: "Refuses devices outside your home or office network."))
