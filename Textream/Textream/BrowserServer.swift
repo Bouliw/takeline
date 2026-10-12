@@ -31,7 +31,9 @@ class BrowserServer {
     private var httpListener: NWListener?
     private var wsListener: NWListener?
     private var wsConnections: [NWConnection] = []
+    private var authenticatedConnections: Set<ObjectIdentifier> = []
     private var broadcastTimer: Timer?
+    private let maxConnections = 8
 
     // Content state
     private var words: [String] = []
@@ -64,6 +66,7 @@ class BrowserServer {
 
         for conn in wsConnections { conn.cancel() }
         wsConnections.removeAll()
+        authenticatedConnections.removeAll()
         contentActive = false
     }
 
@@ -109,6 +112,7 @@ class BrowserServer {
     }
 
     private func handleHTTPConnection(_ conn: NWConnection) {
+        guard RemoteAccess.admits(conn) else { conn.cancel(); return }
         conn.start(queue: .main)
         conn.receive(minimumIncompleteLength: 1, maximumLength: 65536) { [weak self] data, _, _, error in
             guard let self else { conn.cancel(); return }
@@ -133,7 +137,8 @@ class BrowserServer {
     private func startWSListener() {
         guard let port = NWEndpoint.Port(rawValue: wsPort) else { return }
         let params = NWParameters.tcp
-        let wsOptions = NWProtocolWebSocket.Options()
+        // The page only ever sends its access code
+        let wsOptions = RemoteAccess.webSocketOptions(httpPort: httpPort, maximumMessageSize: 4096)
         params.defaultProtocolStack.applicationProtocols.insert(wsOptions, at: 0)
 
         do {
@@ -150,22 +155,41 @@ class BrowserServer {
     }
 
     private func handleWSConnection(_ conn: NWConnection) {
+        guard RemoteAccess.admits(conn), wsConnections.count < maxConnections else {
+            conn.cancel()
+            return
+        }
         conn.start(queue: .main)
         wsConnections.append(conn)
         receiveWSMessage(conn)
+
+        // Auto-disconnect unauthenticated connections after 5 seconds
+        let connId = ObjectIdentifier(conn)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
+            guard let self else { return }
+            if !self.authenticatedConnections.contains(connId) {
+                conn.cancel()
+            }
+        }
 
         conn.stateUpdateHandler = { [weak self] state in
             switch state {
             case .failed, .cancelled:
                 self?.wsConnections.removeAll { $0 === conn }
+                self?.authenticatedConnections.remove(ObjectIdentifier(conn))
             default: break
             }
         }
     }
 
     private func receiveWSMessage(_ conn: NWConnection) {
-        conn.receiveMessage { [weak self] _, _, _, error in
+        conn.receiveMessage { [weak self] data, _, _, error in
             if error != nil { conn.cancel(); return }
+            // The first message must carry the access code; later ones are ignored
+            if let self, let data, !self.authenticatedConnections.contains(ObjectIdentifier(conn)),
+               RemoteAccess.authenticate(data, from: conn) {
+                self.authenticatedConnections.insert(ObjectIdentifier(conn))
+            }
             self?.receiveWSMessage(conn)
         }
     }
@@ -221,10 +245,11 @@ class BrowserServer {
     }
 
     private func broadcast(_ state: BrowserState) {
-        guard !wsConnections.isEmpty, let data = try? JSONEncoder().encode(state) else { return }
+        let connections = wsConnections.filter { authenticatedConnections.contains(ObjectIdentifier($0)) }
+        guard !connections.isEmpty, let data = try? JSONEncoder().encode(state) else { return }
         let meta = NWProtocolWebSocket.Metadata(opcode: .text)
         let ctx = NWConnection.ContentContext(identifier: "ws", metadata: [meta])
-        for conn in wsConnections {
+        for conn in connections {
             conn.send(content: data, contentContext: ctx, completion: .idempotent)
         }
     }
@@ -399,6 +424,8 @@ class BrowserServer {
           <div class="label">Done!</div>
         </div>
 
+        \(RemoteAccess.codePromptHTML)
+
         <script>
         const WSP=\(wsPort),host=location.hostname;
         const MIRROR_KEY='textream.remote.mirror';
@@ -469,9 +496,11 @@ class BrowserServer {
         function connect(){
           ws=new WebSocket('ws://'+host+':'+WSP);
           ws.onopen=()=>{clearTimeout(rt);
+            ws.send(JSON.stringify({type:'auth',text:accessCode()}));
             document.getElementById('conn-status').textContent='Connected';};
           ws.onmessage=e=>{try{render(JSON.parse(e.data))}catch(x){console.error(x)}};
-          ws.onclose=()=>{
+          ws.onclose=e=>{
+            if(e.code===1008){askCode();return}
             document.getElementById('conn-status').textContent='Reconnecting…';
             rt=setTimeout(connect,1500);};
           ws.onerror=()=>{ws.close()};
