@@ -326,7 +326,7 @@ class TextreamService: NSObject, ObservableObject {
 
         let alert = NSAlert()
         alert.messageText = "You have unsaved changes"
-        alert.informativeText = "Do you want to save your changes before opening another file?"
+        alert.informativeText = String(localized: "Your changes will be lost if you don't save them.")
         alert.addButton(withTitle: "Save")
         alert.addButton(withTitle: "Discard")
         alert.addButton(withTitle: "Cancel")
