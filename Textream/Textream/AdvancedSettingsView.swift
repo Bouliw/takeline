@@ -4,9 +4,45 @@ import SwiftUI
 struct AdvancedSettingsView: View {
     @Bindable var settings: NotchSettings
 
+    /// "system", "en" or "fr": the app's own language override, if any.
+    @State private var interfaceLanguage = Self.languageOverride
+    private static let launchLanguage = languageOverride
+
+    private static var languageOverride: String {
+        let domain = UserDefaults.standard.persistentDomain(forName: Bundle.main.bundleIdentifier ?? "") ?? [:]
+        return (domain["AppleLanguages"] as? [String])?.first.map { String($0.prefix(2)) } ?? "system"
+    }
+
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 14) {
+                VStack(alignment: .leading, spacing: 6) {
+                    Picker(String(localized: "Interface language"), selection: $interfaceLanguage) {
+                        Text(String(localized: "Same as macOS")).tag("system")
+                        Text("English").tag("en")
+                        Text("Français").tag("fr")
+                    }
+                    .onChange(of: interfaceLanguage) { _, language in
+                        if language == "system" {
+                            UserDefaults.standard.removeObject(forKey: "AppleLanguages")
+                        } else {
+                            UserDefaults.standard.set([language], forKey: "AppleLanguages")
+                        }
+                    }
+                    if interfaceLanguage != Self.launchLanguage {
+                        HStack {
+                            Text(String(localized: "Takeline needs to restart to change its language."))
+                                .font(.system(size: 11))
+                                .foregroundStyle(.secondary)
+                            Spacer()
+                            Button(String(localized: "Restart"), action: Self.relaunch)
+                                .controlSize(.small)
+                        }
+                    }
+                }
+
+                Divider()
+
                 VStack(alignment: .leading, spacing: 8) {
                     Text(String(localized: "Remote view and Director"))
                         .font(.system(size: 13, weight: .medium))
@@ -53,6 +89,14 @@ struct AdvancedSettingsView: View {
                 .toggleStyle(.checkbox)
             }
             .padding(16)
+        }
+    }
+
+    private static func relaunch() {
+        let configuration = NSWorkspace.OpenConfiguration()
+        configuration.createsNewApplicationInstance = true
+        NSWorkspace.shared.openApplication(at: Bundle.main.bundleURL, configuration: configuration) { _, _ in
+            DispatchQueue.main.async { NSApp.terminate(nil) }
         }
     }
 
