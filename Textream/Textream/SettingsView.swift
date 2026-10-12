@@ -1549,7 +1549,9 @@ struct SettingsView: View {
     }
 
     private func refreshScreens() {
-        availableScreens = NSScreen.screens.filter { $0 != NSScreen.main }
+        // Same rule as the external display itself: everything but the built-in display
+        let builtIn = NSScreen.screens.first { CGDisplayIsBuiltin($0.displayID) != 0 }
+        availableScreens = NSScreen.screens.filter { $0 != (builtIn ?? NSScreen.main) }
         if settings.externalScreenID == 0, let first = availableScreens.first {
             settings.externalScreenID = first.displayID
         }
