@@ -27,6 +27,12 @@ Takeline shows your script right below the MacBook notch, in a floating window, 
 - **Estimated video length**, at your own reading pace, learned from your sessions.
 - **English and French interface.**
 
+## Install
+
+1. Download `Takeline.dmg` from the [latest release](https://github.com/Bouliw/takeline/releases/latest), open it and drag Takeline into Applications.
+2. Open Takeline. It is not signed by an identified developer yet, so the first time macOS stops it: click **Done**, then open **System Settings › Privacy & Security**, scroll down to **Security** and click **Open Anyway**.
+3. In **Settings › Voice**, click **Install** next to each language you speak: Apple's speech model for that language is downloaded once.
+
 ## Features
 
 ### Guidance modes
