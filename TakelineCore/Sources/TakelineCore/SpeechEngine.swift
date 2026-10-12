@@ -65,6 +65,7 @@ public final class AppleSpeechEngine: SpeechEngine, @unchecked Sendable {
 
     private let lock = NSLock()
     private var streams: [Stream] = []
+    private var output: AsyncStream<Heard>.Continuation?
 
     public init() {}
 
@@ -132,7 +133,10 @@ public final class AppleSpeechEngine: SpeechEngine, @unchecked Sendable {
             continuation.finish()
             throw error
         }
-        lock.withLock { streams = started }
+        lock.withLock {
+            streams = started
+            self.output = continuation
+        }
         return output
     }
 
@@ -159,11 +163,12 @@ public final class AppleSpeechEngine: SpeechEngine, @unchecked Sendable {
     }
 
     public func stop() async {
-        let streams = lock.withLock { () -> [Stream] in
-            defer { self.streams = [] }
-            return self.streams
+        let (streams, output) = lock.withLock { () -> ([Stream], AsyncStream<Heard>.Continuation?) in
+            defer { self.streams = []; self.output = nil }
+            return (self.streams, self.output)
         }
         for stream in streams { await Self.finish(stream) }
+        output?.finish()
     }
 
     private static func finish(_ stream: Stream) async {
