@@ -52,8 +52,10 @@ public enum CueSpotter {
             + p(.command(.previousParagraph),
                 "reviens au paragraphe davant", "reviens au paragraphe precedent", "retourne au paragraphe precedent",
                 "paragraphe precedent", "paragraphe davant", "remonte dun paragraphe",
-                "previous paragraph", "go back a paragraph", "back a paragraph", "go back one paragraph",
-                "last paragraph again")
+                "revenir au paragraphe precedent", "retour au paragraphe precedent",
+                "on revient au paragraphe davant", "on revient au paragraphe precedent",
+                "go back to the previous paragraph", "back to the previous paragraph", "previous paragraph",
+                "go back a paragraph", "back a paragraph", "go back one paragraph", "last paragraph again")
             + p(.command(.restart),
                 "reprends au debut", "reprends depuis le debut", "reprends du debut", "on reprend du debut",
                 "on reprend au debut", "retour au debut", "reviens au debut", "recommence depuis le debut",
@@ -94,6 +96,12 @@ public enum CueSpotter {
         guard let best else { return nil }
         let phrase = utterance[best.start..<best.start + best.pattern.words.count].joined(separator: " ")
         return Cue(intent: best.pattern.intent, phrase: phrase, isStrong: best.pattern.isStrong, utterance: utterance)
+    }
+
+    /// A strong phrase said on its own, with at most two other words: no need to
+    /// ask a model, act right away.
+    public static func isClearCut(_ cue: Cue) -> Bool {
+        cue.isStrong && cue.utterance.count <= cue.phrase.split(separator: " ").count + 2
     }
 
     /// Without a language model: a strong phrase said on its own (a command, or
@@ -138,19 +146,29 @@ public actor CueJudge {
 
     public static var isAvailable: Bool { SystemLanguageModel.default.isAvailable }
 
+    private var session: LanguageModelSession?
+
     public init() {}
+
+    /// Loads the model ahead of the first question, so the first answer is quick.
+    public func prepare() {
+        guard Self.isAvailable, session == nil else { return }
+        let session = makeSession()
+        session.prewarm()
+        self.session = session
+    }
+
+    private func makeSession() -> LanguageModelSession {
+        LanguageModelSession(instructions: Self.instructions)
+    }
 
     /// The intent, or nil when the words were part of the talk. Throws when the
     /// model is unavailable or fails, so the caller can fall back to rules.
     public func judge(_ cue: Cue, sentence: String, previousSentence: String) async throws -> Intent? {
-        let session = LanguageModelSession(instructions: """
-            Someone is recording a video while reading a script on a teleprompter, in French, English or both. \
-            Speech recognition heard a phrase that may be meant for the teleprompter rather than the audience. \
-            Decide what they meant from the context.
-            - retake: they stumbled or want to start the sentence again ("on la refait", "attends, non", "je reprends", "take two", "scratch that", "let me start over").
-            - command: they ask the teleprompter to do something: go back to the previous paragraph, restart from the beginning, pause, resume, make the text bigger or smaller.
-            - speech: the words belong to what they are telling the audience, for example a story where someone said "on la refait", or a sentence of the script.
-            """)
+        // Each question starts from the instructions alone: earlier answers must not sway the next.
+        let session = self.session ?? makeSession()
+        self.session = nil
+        defer { prepare() }
         let prompt = """
             Previous sentence of the script: \(previousSentence)
             Sentence of the script being read: \(sentence)
@@ -167,4 +185,13 @@ public actor CueJudge {
             return nil
         }
     }
+
+    static let instructions = """
+            Someone is recording a video while reading a script on a teleprompter, in French, English or both. \
+            Speech recognition heard a phrase that may be meant for the teleprompter rather than the audience. \
+            Decide what they meant from the context.
+            - retake: they stumbled or want to start the sentence again ("on la refait", "attends, non", "je reprends", "take two", "scratch that", "let me start over").
+            - command: they ask the teleprompter to do something: go back to the previous paragraph, restart from the beginning, pause, resume, make the text bigger or smaller.
+            - speech: the words belong to what they are telling the audience, for example a story where someone said "on la refait", or a sentence of the script.
+            """
 }
