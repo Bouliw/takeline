@@ -40,9 +40,24 @@ Happy presenting! [wave]
 """
 
     private var languageLabel: String {
+        guard !NotchSettings.shared.speechLanguageAutomatic else { return String(localized: "Automatic language") }
         let locale = NotchSettings.shared.speechLocale
         return Locale.current.localizedString(forIdentifier: locale)
             ?? locale
+    }
+
+    /// How long the video will be at the reader's pace (learned from their sessions).
+    private var durationLabel: some View {
+        let words = service.pages.reduce(0) { $0 + ReadingPace.spokenWords(in: $1) }
+        let pace = NotchSettings.shared.wordsPerMinute > 0 ? NotchSettings.shared.wordsPerMinute : ReadingPace.defaultWordsPerMinute
+        let seconds = ReadingPace.duration(words: words, wordsPerMinute: pace).rounded()
+        let duration = Duration.seconds(seconds).formatted(.units(allowed: [.minutes, .seconds], width: .abbreviated))
+        return Text("≈ \(duration)")
+            .font(.system(size: 11, weight: .medium))
+            .foregroundStyle(.tertiary)
+            .help(NotchSettings.shared.wordsPerMinute > 0
+                  ? String(localized: "Estimated length of the video at your pace: \(Int(pace.rounded())) words per minute.")
+                  : String(localized: "Estimated length of the video at 150 words per minute. Takeline learns your own pace as you read."))
     }
 
     private var currentText: Binding<String> {
@@ -322,6 +337,9 @@ Happy presenting! [wave]
 
                         // Buttons pinned right
                         HStack(spacing: 10) {
+                            if hasAnyContent && !isRecording {
+                                durationLabel
+                            }
                             Spacer()
 
                             Button {
