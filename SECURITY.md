@@ -7,16 +7,11 @@
 | Latest release | ✅ |
 | Older releases | ❌ |
 
-Only the latest release receives security updates. Please keep Textream up to date.
+Only the latest release receives security updates. Please keep Takeline up to date.
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in Textream, **please do not open a public issue.**
-
-Instead, report it privately:
-
-- **Email:** [fka@fka.dev](mailto:fka@fka.dev)
-- **Subject:** `[SECURITY] Textream — <brief description>`
+If you discover a security vulnerability in Takeline, **please do not open a public issue.** Report it privately with GitHub's [private vulnerability reporting](https://github.com/Bouliw/takeline/security/advisories/new) for this repository.
 
 Please include:
 
@@ -25,17 +20,15 @@ Please include:
 3. Potential impact
 4. Suggested fix (if any)
 
-You should receive an acknowledgment within **48 hours**. Once confirmed, a fix will be prioritized and released as soon as possible.
-
 ## Security Considerations
 
 ### On-Device Processing
 
-All speech recognition runs locally via Apple's Speech framework. No audio data, transcripts, or scripts are sent to external servers. There are no accounts, analytics, or telemetry.
+All speech recognition runs on the device with Apple's SpeechAnalyzer, which never sends audio to a server; when a language isn't available on the device, Takeline reports it instead of using a server. Retake phrases are understood by Apple's on-device language model. No audio, transcript or script is sent anywhere. There are no accounts, analytics or telemetry, and the app makes no network request unless the user turns on the update check (a request to the GitHub releases API).
 
 ### Network Servers
 
-Textream includes two optional network servers. Each serves a single-page web UI over HTTP and talks to it over a WebSocket on the next port:
+Takeline includes two optional network servers. Each serves a single-page web UI over HTTP and talks to it over a WebSocket on the next port:
 
 | Server | Default Ports | Purpose |
 |--------|---------------|---------|
@@ -56,7 +49,7 @@ Textream includes two optional network servers. Each serves a single-page web UI
 
 ### Permissions
 
-Textream requests the following macOS permissions:
+Takeline requests the following macOS permissions:
 
 - **Microphone** — Required for speech recognition and voice-activated features.
 - **Speech Recognition** — Required for on-device word tracking.
@@ -69,4 +62,4 @@ No other permissions are requested or required.
 - Only enable network servers on trusted private networks.
 - Keep the access code and the local network restriction on unless you have a reason to turn them off.
 - Disable Remote Connection and Director Mode when not actively in use.
-- Keep Textream updated to the latest version via Homebrew or GitHub Releases.
+- Keep Takeline updated to the latest version.
