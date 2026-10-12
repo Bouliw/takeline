@@ -27,17 +27,17 @@ struct ContentView: View {
     @State private var languageDetectionTask: Task<Void, Never>?
     @FocusState private var isTextFocused: Bool
 
-    private let defaultText = """
-Welcome to Textream! This is your personal teleprompter that sits right below your MacBook's notch. [smile]
+    private let defaultText = String(localized: "welcomeText", defaultValue: """
+Welcome to Takeline! Your teleprompter sits right below your MacBook's notch and follows your voice, on this Mac only. [smile]
 
-As you read aloud, the text will highlight in real-time, following your voice. The speech recognition matches your words and keeps track of your progress. [pause]
+Read this aloud: the highlight follows you word by word. Skip a line and it jumps with you. Improvise for a moment and it waits. [pause]
 
-You can pause at any time, go back and re-read sections, and the highlighting will follow along. When you finish reading all the text, the overlay will automatically close with a smooth animation. [nod]
+Stumbled? Say "take two" or "on la refait", or simply read the sentence again: the text goes back to the start of the sentence, and the retake is noted for your edit. [nod]
 
-Try reading this passage out loud to see how the highlighting works. The waveform at the bottom shows your voice activity, and you'll see the last few words you spoke displayed next to it.
+You can also say "previous paragraph", "from the top", "pause" or "bigger text".
 
-Happy presenting! [wave]
-"""
+Happy recording! [wave]
+""")
 
     private var languageLabel: String {
         guard !NotchSettings.shared.speechLanguageAutomatic else { return String(localized: "Automatic language") }
