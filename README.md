@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="Textream/Textream/Assets.xcassets/AppIcon.appiconset/icon_256x256.png" width="128" height="128" alt="Takeline icon">
+</p>
+
 <h1 align="center">Takeline</h1>
 
 <p align="center">
