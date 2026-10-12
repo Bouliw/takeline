@@ -20,8 +20,12 @@ struct SpeechLanguageSuggestion: Equatable {
 }
 
 enum SpeechLocaleSupport {
-    static let supportedLocales = SFSpeechRecognizer.supportedLocales()
-        .sorted { $0.identifier < $1.identifier }
+    /// Languages Apple's on-device speech recognition supports, loaded at launch.
+    static var supportedLocales: [Locale] = []
+
+    static func load() async {
+        supportedLocales = await SpeechTranscriber.supportedLocales.sorted { $0.identifier < $1.identifier }
+    }
 
     static func closestSupportedLocale(to identifier: String) -> Locale? {
         let normalizedIdentifier = normalized(identifier)

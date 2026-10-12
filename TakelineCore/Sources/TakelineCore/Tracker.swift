@@ -25,7 +25,7 @@ public struct Tracker: Sendable {
     /// How many of the last words heard are aligned: enough to recognize a
     /// passage, few enough that what was read a while ago doesn't hold the
     /// position once the reader has moved.
-    static let heardWindow = 8
+    public static let heardWindow = 8
     static let gapHeard = 1.0
 
     public init(script: Script, position: Int = 0) {

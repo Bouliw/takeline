@@ -313,6 +313,17 @@ enum ListeningMode: String, CaseIterable, Identifiable {
     }
 }
 
+// MARK: - Speech Engine
+
+enum SpeechEngineChoice: String, CaseIterable, Identifiable {
+    /// Apple's on-device speech recognition: nothing to download, one language at a time.
+    case apple
+    /// Kyutai STT 1B: made for live speech, French and English mixed.
+    case kyutai
+
+    var id: String { rawValue }
+}
+
 // MARK: - Reading Position
 
 enum ReadingPosition: String, CaseIterable, Identifiable {
@@ -483,14 +494,68 @@ class NotchSettings {
         didSet { UserDefaults.standard.set(Int(directorServerPort), forKey: "directorServerPort") }
     }
 
+    /// Picks the speech language from the script, both when it mixes two.
+    var speechLanguageAutomatic: Bool {
+        didSet { UserDefaults.standard.set(speechLanguageAutomatic, forKey: "speechLanguageAutomatic") }
+    }
+
+    var speechEngine: SpeechEngineChoice {
+        didSet { UserDefaults.standard.set(speechEngine.rawValue, forKey: "speechEngine") }
+    }
+
+    /// Goes back to the start of the sentence on "on la refait", "take two"…
+    var retakeDetection: Bool {
+        didSet { UserDefaults.standard.set(retakeDetection, forKey: "retakeDetection") }
+    }
+
+    var voiceCommands: Bool {
+        didSet { UserDefaults.standard.set(voiceCommands, forKey: "voiceCommands") }
+    }
+
+    /// Lets the on-device Apple model decide, from context, whether a phrase was meant for the prompter.
+    var understandContext: Bool {
+        didSet { UserDefaults.standard.set(understandContext, forKey: "understandContext") }
+    }
+
+    /// Writes the script and its retakes to a file at the end of each session.
+    var saveSessions: Bool {
+        didSet { UserDefaults.standard.set(saveSessions, forKey: "saveSessions") }
+    }
+
+    var sessionsFolder: String {
+        didSet { UserDefaults.standard.set(sessionsFolder, forKey: "sessionsFolder") }
+    }
+
+    /// The reader's pace, learned from their sessions; 0 until known.
+    var wordsPerMinute: Double {
+        didSet { UserDefaults.standard.set(wordsPerMinute, forKey: "wordsPerMinute") }
+    }
+
+    /// Remote view and Director ask for the access code shown in Settings.
+    var remoteRequiresCode: Bool {
+        didSet { UserDefaults.standard.set(remoteRequiresCode, forKey: "remoteRequiresCode") }
+    }
+
+    /// Remote view and Director refuse devices outside the local network.
+    var remoteLocalNetworkOnly: Bool {
+        didSet { UserDefaults.standard.set(remoteLocalNetworkOnly, forKey: "remoteLocalNetworkOnly") }
+    }
+
+    var checkForUpdates: Bool {
+        didSet { UserDefaults.standard.set(checkForUpdates, forKey: "checkForUpdates") }
+    }
+
     var font: NSFont {
         fontFamilyPreset.font(size: fontSizePreset.pointSize)
     }
 
     static let defaultWidth: CGFloat = 340
     static let defaultHeight: CGFloat = 150
-    static let defaultLocale: String = SpeechLocaleSupport.closestSupportedLocale(to: Locale.current.identifier)?.identifier
-        ?? Locale.current.identifier
+    static let defaultLocale: String = Locale.current.language.languageCode.map {
+        "\($0.identifier)_\(Locale.current.region?.identifier ?? ($0.identifier == "en" ? "US" : $0.identifier.uppercased()))"
+    } ?? "en_US"
+    static let defaultSessionsFolder = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        .appending(path: "Takeline").path
 
     static let minWidth: CGFloat = 310
     static let maxWidth: CGFloat = 500
@@ -502,9 +567,7 @@ class NotchSettings {
         let savedHeight = UserDefaults.standard.double(forKey: "textAreaHeight")
         self.notchWidth = savedWidth > 0 ? CGFloat(savedWidth) : Self.defaultWidth
         self.textAreaHeight = savedHeight > 0 ? CGFloat(savedHeight) : Self.defaultHeight
-        let preferredSpeechLocale = UserDefaults.standard.string(forKey: "speechLocale") ?? Self.defaultLocale
-        self.speechLocale = SpeechLocaleSupport.closestSupportedLocale(to: preferredSpeechLocale)?.identifier
-            ?? Self.defaultLocale
+        self.speechLocale = UserDefaults.standard.string(forKey: "speechLocale") ?? Self.defaultLocale
         self.fontSizePreset = FontSizePreset(rawValue: UserDefaults.standard.string(forKey: "fontSizePreset") ?? "") ?? .lg
         self.fontFamilyPreset = FontFamilyPreset(rawValue: UserDefaults.standard.string(forKey: "fontFamilyPreset") ?? "") ?? .sans
         self.fontColorPreset = FontColorPreset(rawValue: UserDefaults.standard.string(forKey: "fontColorPreset") ?? "") ?? .white
@@ -549,5 +612,17 @@ class NotchSettings {
         self.directorModeEnabled = UserDefaults.standard.object(forKey: "directorModeEnabled") as? Bool ?? false
         let savedDirectorPort = UserDefaults.standard.integer(forKey: "directorServerPort")
         self.directorServerPort = (1024..<Int(UInt16.max)).contains(savedDirectorPort) ? UInt16(savedDirectorPort) : 7575
+        let defaults = UserDefaults.standard
+        self.speechLanguageAutomatic = defaults.object(forKey: "speechLanguageAutomatic") as? Bool ?? true
+        self.speechEngine = SpeechEngineChoice(rawValue: defaults.string(forKey: "speechEngine") ?? "") ?? .apple
+        self.retakeDetection = defaults.object(forKey: "retakeDetection") as? Bool ?? true
+        self.voiceCommands = defaults.object(forKey: "voiceCommands") as? Bool ?? true
+        self.understandContext = defaults.object(forKey: "understandContext") as? Bool ?? true
+        self.saveSessions = defaults.object(forKey: "saveSessions") as? Bool ?? true
+        self.sessionsFolder = defaults.string(forKey: "sessionsFolder") ?? Self.defaultSessionsFolder
+        self.wordsPerMinute = defaults.double(forKey: "wordsPerMinute")
+        self.remoteRequiresCode = defaults.object(forKey: "remoteRequiresCode") as? Bool ?? true
+        self.remoteLocalNetworkOnly = defaults.object(forKey: "remoteLocalNetworkOnly") as? Bool ?? true
+        self.checkForUpdates = defaults.object(forKey: "checkForUpdates") as? Bool ?? false
     }
 }

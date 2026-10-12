@@ -38,7 +38,6 @@ class BrowserServer {
     private var totalCharCount: Int = 0
     private var hasNextPage: Bool = false
     private weak var speechRecognizer: SpeechRecognizer?
-    private var timerWordProgress: Double = 0
     private var contentActive: Bool = false
 
     var httpPort: UInt16 { NotchSettings.shared.browserServerPort }
@@ -75,7 +74,6 @@ class BrowserServer {
         self.words = words
         self.totalCharCount = totalCharCount
         self.hasNextPage = hasNextPage
-        self.timerWordProgress = 0
         self.contentActive = true
         startBroadcasting()
     }
@@ -84,7 +82,6 @@ class BrowserServer {
         self.words = words
         self.totalCharCount = totalCharCount
         self.hasNextPage = hasNextPage
-        self.timerWordProgress = 0
     }
 
     func hideContent() {
@@ -185,24 +182,8 @@ class BrowserServer {
     private func broadcastCurrentState() {
         guard contentActive, !wsConnections.isEmpty else { return }
 
-        let charCount: Int
         let mode = NotchSettings.shared.listeningMode
-        // Check if scroll already reached the end, to stop advancing the timer
-        let scrollDone = totalCharCount > 0 && charOffsetForWordProgress(timerWordProgress) >= totalCharCount
-        switch mode {
-        case .wordTracking:
-            charCount = speechRecognizer?.recognizedCharCount ?? 0
-        case .classic:
-            if !scrollDone {
-                timerWordProgress += NotchSettings.shared.scrollSpeed * 0.1
-            }
-            charCount = charOffsetForWordProgress(timerWordProgress)
-        case .silencePaused:
-            if !scrollDone && speechRecognizer?.isListening == true && (speechRecognizer?.isSpeaking ?? false) {
-                timerWordProgress += NotchSettings.shared.scrollSpeed * 0.1
-            }
-            charCount = charOffsetForWordProgress(timerWordProgress)
-        }
+        let charCount = speechRecognizer?.effectiveCharCount ?? 0
 
         let effective = min(charCount, totalCharCount)
         let rawDone = totalCharCount > 0 && effective >= totalCharCount
@@ -249,19 +230,6 @@ class BrowserServer {
     }
 
     // MARK: - Helpers
-
-    private func charOffsetForWordProgress(_ progress: Double) -> Int {
-        let wholeWord = Int(progress)
-        let frac = progress - Double(wholeWord)
-        var offset = 0
-        for i in 0..<min(wholeWord, words.count) {
-            offset += words[i].count + 1
-        }
-        if wholeWord < words.count {
-            offset += Int(Double(words[wholeWord].count) * frac)
-        }
-        return min(offset, totalCharCount)
-    }
 
     static func localIPAddress() -> String? {
         var ifaddr: UnsafeMutablePointer<ifaddrs>?

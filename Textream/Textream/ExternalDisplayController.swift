@@ -122,52 +122,15 @@ struct ExternalDisplayView: View {
     private var totalCharCount: Int { content.totalCharCount }
     private var hasNextPage: Bool { content.hasNextPage }
 
-    // Timer-based scroll for classic & silence-paused modes
-    @State private var timerWordProgress: Double = 0
-    @State private var isUserScrolling: Bool = false
     @State private var countdownRemaining: Int = 0
     @State private var countdownTimer: Timer? = nil
-    private let scrollTimer = Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()
 
     private var listeningMode: ListeningMode {
         NotchSettings.shared.listeningMode
     }
 
-    /// Convert fractional word index to char offset using actual word lengths
-    private func charOffsetForWordProgress(_ progress: Double) -> Int {
-        let wholeWord = Int(progress)
-        let frac = progress - Double(wholeWord)
-        var offset = 0
-        for i in 0..<min(wholeWord, words.count) {
-            offset += words[i].count + 1
-        }
-        if wholeWord < words.count {
-            offset += Int(Double(words[wholeWord].count) * frac)
-        }
-        return min(offset, totalCharCount)
-    }
-
-    /// Convert char offset back to fractional word index (for taps)
-    private func wordProgressForCharOffset(_ charOffset: Int) -> Double {
-        var offset = 0
-        for (i, word) in words.enumerated() {
-            let end = offset + word.count
-            if charOffset <= end {
-                let frac = Double(charOffset - offset) / Double(max(1, word.count))
-                return Double(i) + frac
-            }
-            offset = end + 1
-        }
-        return Double(words.count)
-    }
-
     private var effectiveCharCount: Int {
-        switch listeningMode {
-        case .wordTracking:
-            return speechRecognizer.recognizedCharCount
-        case .classic, .silencePaused:
-            return charOffsetForWordProgress(timerWordProgress)
-        }
+        speechRecognizer.effectiveCharCount
     }
 
     var isDone: Bool {
@@ -215,23 +178,7 @@ struct ExternalDisplayView: View {
             }
         }
         .onDisappear { cancelCountdown() }
-        .onReceive(scrollTimer) { _ in
-            guard !isDone, !isUserScrolling else { return }
-            let speed = NotchSettings.shared.scrollSpeed // words per second
-            switch listeningMode {
-            case .classic:
-                timerWordProgress += speed * 0.05
-            case .silencePaused:
-                if speechRecognizer.isListening && speechRecognizer.isSpeaking {
-                    timerWordProgress += speed * 0.05
-                }
-            case .wordTracking:
-                break
-            }
-        }
         .onChange(of: content.currentPageIndex) { _, _ in
-            timerWordProgress = 0
-            isUserScrolling = false
             cancelCountdown()
         }
     }
@@ -253,20 +200,13 @@ struct ExternalDisplayView: View {
                     cueUnreadOpacity: NotchSettings.shared.cueBrightness.unreadOpacity,
                     cueReadOpacity: NotchSettings.shared.cueBrightness.readOpacity,
                     onWordTap: { charOffset in
-                        if listeningMode == .wordTracking {
-                            speechRecognizer.jumpTo(charOffset: charOffset)
-                        } else {
-                            timerWordProgress = wordProgressForCharOffset(charOffset)
-                        }
+                        speechRecognizer.jumpTo(charOffset: charOffset)
                     },
                     onManualScroll: { scrolling, newProgress in
-                        isUserScrolling = scrolling
-                        if !scrolling {
-                            timerWordProgress = max(0, min(Double(words.count), newProgress))
-                        }
+                        speechRecognizer.setManualScroll(scrolling, progress: newProgress)
                     },
                     smoothScroll: listeningMode != .wordTracking,
-                    smoothWordProgress: timerWordProgress,
+                    smoothWordProgress: speechRecognizer.timerWordProgress,
                     isListening: isEffectivelyListening,
                     readingPosition: NotchSettings.shared.readingPosition,
                 paragraphBreakBeforeWordIndices: NotchSettings.shared.showParagraphDividers

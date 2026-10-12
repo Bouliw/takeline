@@ -7,7 +7,6 @@
 
 import SwiftUI
 import AppKit
-import Speech
 import Combine
 import CoreImage.CIFilterBuiltins
 
@@ -777,7 +776,7 @@ struct SettingsView: View {
                     Text("Speech Language")
                         .font(.system(size: 13, weight: .medium))
                     Picker("", selection: $settings.speechLocale) {
-                        ForEach(SFSpeechRecognizer.supportedLocales().sorted(by: { $0.identifier < $1.identifier }), id: \.identifier) { locale in
+                        ForEach(SpeechLocaleSupport.supportedLocales, id: \.identifier) { locale in
                             Text(Locale.current.localizedString(forIdentifier: locale.identifier) ?? locale.identifier)
                                 .tag(locale.identifier)
                         }

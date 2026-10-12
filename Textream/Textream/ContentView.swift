@@ -68,6 +68,8 @@ Happy presenting! [wave]
     private func scheduleLanguageDetection(for text: String) {
         languageDetectionTask?.cancel()
         languageSuggestion = nil
+        // In automatic mode the language follows the script: nothing to suggest.
+        guard !NotchSettings.shared.speechLanguageAutomatic else { return }
         let pageIndex = service.currentPageIndex
         let localeIdentifier = NotchSettings.shared.speechLocale
 
