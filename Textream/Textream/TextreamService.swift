@@ -408,10 +408,9 @@ class TextreamService: NSObject, ObservableObject {
         let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return }
 
-        // Director mode is single page
-        pages = [trimmed]
-        currentPageIndex = 0
-        readPages.removeAll()
+        // Director mode is single page. Its script only lives in the overlay,
+        // so the user's pages, file and saved state stay untouched.
+        overlayController.overlayContent.pageCount = 1
 
         // Force word tracking mode for director
         let savedMode = NotchSettings.shared.listeningMode
@@ -460,8 +459,6 @@ class TextreamService: NSObject, ObservableObject {
         guard directorIsReading else { return }
         let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return }
-
-        pages = [trimmed]
 
         let words = splitTextIntoWords(trimmed)
         let totalCharCount = words.joined(separator: " ").count
