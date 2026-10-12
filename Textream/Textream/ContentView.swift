@@ -666,9 +666,13 @@ Happy recording! [wave]
             }
         }
         .onAppear {
-            // Set default text for the first page if empty
+            // Set default text for the first page if empty, without counting it as a change
             if service.pages.count == 1 && service.pages[0].isEmpty {
+                let wasSaved = service.savedPages == service.pages
                 service.pages[0] = defaultText
+                if wasSaved {
+                    service.savedPages = service.pages
+                }
             }
             // Sync button state with overlay
             if service.overlayController.isShowing {
