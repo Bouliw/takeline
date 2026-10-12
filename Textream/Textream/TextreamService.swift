@@ -199,15 +199,18 @@ class TextreamService: NSObject, ObservableObject {
         )
     }
 
-    func saveFile() {
+    /// Returns true once the pages are written, false if the user cancelled or saving failed.
+    @discardableResult
+    func saveFile() -> Bool {
         if let url = currentFileURL {
-            saveToURL(url)
+            return saveToURL(url)
         } else {
-            saveFileAs()
+            return saveFileAs()
         }
     }
 
-    func saveFileAs() {
+    @discardableResult
+    func saveFileAs() -> Bool {
         let panel = NSSavePanel()
         panel.allowedContentTypes = [.init(filenameExtension: "textream")!]
         panel.nameFieldStringValue = "Untitled.textream"
@@ -215,13 +218,12 @@ class TextreamService: NSObject, ObservableObject {
         panel.directoryURL = currentFileURL?.deletingLastPathComponent()
             ?? lastDocumentDirectoryURL
 
-        panel.begin { [weak self] response in
-            guard response == .OK, let url = panel.url else { return }
-            self?.saveToURL(url)
-        }
+        // Modal, so a save asked for before quitting finishes before the app quits
+        guard panel.runModal() == .OK, let url = panel.url else { return false }
+        return saveToURL(url)
     }
 
-    private func saveToURL(_ url: URL) {
+    private func saveToURL(_ url: URL) -> Bool {
         do {
             let data = try JSONEncoder().encode(pages)
             try data.write(to: url, options: .atomic)
@@ -229,11 +231,13 @@ class TextreamService: NSObject, ObservableObject {
             savedPages = pages
             rememberDocumentURL(url)
             NSDocumentController.shared.noteNewRecentDocumentURL(url)
+            return true
         } catch {
             let alert = NSAlert()
             alert.messageText = "Failed to save file"
             alert.informativeText = error.localizedDescription
             alert.runModal()
+            return false
         }
     }
 
@@ -331,8 +335,7 @@ class TextreamService: NSObject, ObservableObject {
         let response = alert.runModal()
         switch response {
         case .alertFirstButtonReturn:
-            saveFile()
-            return true
+            return saveFile()
         case .alertSecondButtonReturn:
             return true
         default:

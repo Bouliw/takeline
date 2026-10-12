@@ -82,9 +82,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
 
     func windowShouldClose(_ sender: NSWindow) -> Bool {
-        if TextreamService.shared.hasUnsavedChanges {
-            guard TextreamService.shared.confirmDiscardIfNeeded() else { return false }
-        }
+        // applicationShouldTerminate asks about unsaved changes
         NSApp.terminate(nil)
         return false
     }
@@ -97,7 +95,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             event.eventID == kAEQuitApplication,
             event.paramDescriptor(forKeyword: kAEQuitReason) == nil
         else {
-            return .terminateNow
+            // Covers Quit and closing the window: wait for the user to save, discard or cancel
+            return TextreamService.shared.confirmDiscardIfNeeded() ? .terminateNow : .terminateCancel
         }
 
         let senderPID = event.attributeDescriptor(forKeyword: keySenderPIDAttr)?.int32Value ?? 0
