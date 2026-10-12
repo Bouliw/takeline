@@ -152,12 +152,18 @@ final class SpeechFollower {
             return
         }
         recognizer = activeRecognizer
+        // Audio must never leave the device: without on-device support, say so.
+        guard activeRecognizer.supportsOnDeviceRecognition else {
+            fail("On-device speech recognition isn't available for the selected language.")
+            return
+        }
         guard activeRecognizer.isAvailable else {
             scheduleRestart(message: "Speech recognizer is temporarily unavailable.")
             return
         }
 
         let request = SFSpeechAudioBufferRecognitionRequest()
+        request.requiresOnDeviceRecognition = true
         request.shouldReportPartialResults = true
         request.taskHint = .dictation
         let upcoming = String(source.text.dropFirst(matcher.matchStartOffset))
