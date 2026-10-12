@@ -349,7 +349,7 @@ struct NotchPreviewContent: View {
 // MARK: - Settings Tabs
 
 enum SettingsTab: String, CaseIterable, Identifiable {
-    case appearance, guidance, reading, teleprompter, external, browser, director
+    case appearance, guidance, voice, reading, teleprompter, external, browser, director, advanced
 
     var id: String { rawValue }
 
@@ -357,11 +357,13 @@ enum SettingsTab: String, CaseIterable, Identifiable {
         switch self {
         case .appearance: return "Appearance"
         case .guidance:   return "Guidance"
+        case .voice:      return String(localized: "Voice")
         case .reading:    return "Reading"
         case .teleprompter: return "Teleprompter"
         case .external:   return "External"
         case .browser:    return "Remote"
         case .director:   return "Director"
+        case .advanced:   return String(localized: "Advanced")
         }
     }
 
@@ -369,11 +371,13 @@ enum SettingsTab: String, CaseIterable, Identifiable {
         switch self {
         case .appearance: return "paintpalette"
         case .guidance:   return "waveform"
+        case .voice:      return "mic"
         case .reading:    return "book"
         case .teleprompter: return "macwindow"
         case .external:   return "rectangle.on.rectangle"
         case .browser:    return "antenna.radiowaves.left.and.right"
         case .director:   return "megaphone"
+        case .advanced:   return "gearshape.2"
         }
     }
 }
@@ -445,6 +449,10 @@ struct SettingsView: View {
                     browserTab
                 case .director:
                     directorTab
+                case .voice:
+                    VoiceSettingsView(settings: settings)
+                case .advanced:
+                    AdvancedSettingsView(settings: settings)
                 }
 
                 Divider()
@@ -768,22 +776,6 @@ struct SettingsView: View {
             Text(settings.listeningMode.description)
                 .font(.system(size: 11))
                 .foregroundStyle(.secondary)
-
-            if settings.listeningMode == .wordTracking {
-                Divider()
-
-                VStack(alignment: .leading, spacing: 6) {
-                    Text("Speech Language")
-                        .font(.system(size: 13, weight: .medium))
-                    Picker("", selection: $settings.speechLocale) {
-                        ForEach(SpeechLocaleSupport.supportedLocales, id: \.identifier) { locale in
-                            Text(Locale.current.localizedString(forIdentifier: locale.identifier) ?? locale.identifier)
-                                .tag(locale.identifier)
-                        }
-                    }
-                    .labelsHidden()
-                }
-            }
 
             if settings.listeningMode != .classic {
                 Divider()
@@ -1545,6 +1537,15 @@ struct SettingsView: View {
         settings.browserServerPort = 7373
         settings.directorModeEnabled = false
         settings.directorServerPort = 7575
+        settings.speechLanguageAutomatic = true
+        settings.retakeDetection = true
+        settings.voiceCommands = true
+        settings.understandContext = true
+        settings.saveSessions = true
+        settings.sessionsFolder = NotchSettings.defaultSessionsFolder
+        settings.remoteRequiresCode = true
+        settings.remoteLocalNetworkOnly = true
+        settings.checkForUpdates = false
     }
 
     private func refreshScreens() {
