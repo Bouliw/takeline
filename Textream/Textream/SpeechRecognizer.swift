@@ -251,6 +251,9 @@ class SpeechRecognizer {
         startScrollTimer()
         sessionGeneration &+= 1
         guard NotchSettings.shared.listeningMode != .classic else { return }
+        if isWordTracking && NotchSettings.shared.understandContext {
+            Task { [judge] in await judge.prepare() }
+        }
         shouldListen = true
         isListening = false
         isStarting = true
@@ -609,6 +612,11 @@ class SpeechRecognizer {
         case .retake where !settings.retakeDetection: return
         case .command where !settings.voiceCommands: return
         default: break
+        }
+        // "On la refait" said on its own needs no second opinion: act at once.
+        if CueSpotter.isClearCut(cue) {
+            act(on: cue.intent, phrase: cue.phrase)
+            return
         }
         guard settings.understandContext, CueJudge.isAvailable else {
             if let intent = CueSpotter.decideWithoutModel(cue) { act(on: intent, phrase: cue.phrase) }
