@@ -45,8 +45,6 @@ class DirectorServer {
 
     // Dedicated queue for broadcasting to avoid blocking the main/UI thread
     private let broadcastQueue = DispatchQueue(label: "com.textream.director.broadcast")
-    // Security: shared secret token for WebSocket authentication
-    private var authToken: String = ""
 
     // Content state
     private var words: [String] = []
@@ -69,7 +67,6 @@ class DirectorServer {
 
     func start() {
         stop()
-        authToken = Self.generateToken()
         startHTTPListener()
         startWSListener()
     }
@@ -129,6 +126,7 @@ class DirectorServer {
     }
 
     private func handleHTTPConnection(_ conn: NWConnection) {
+        guard RemoteAccess.admits(conn) else { conn.cancel(); return }
         conn.start(queue: .main)
         conn.receive(minimumIncompleteLength: 1, maximumLength: 65536) { [weak self] data, _, _, error in
             guard let self else { conn.cancel(); return }
@@ -142,7 +140,7 @@ class DirectorServer {
     }
 
     private func buildHTTPResponse() -> Data {
-        let html = Self.generateHTML(wsPort: wsPort, authToken: authToken)
+        let html = Self.generateHTML(wsPort: wsPort)
         let body = Data(html.utf8)
         let header = "HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=utf-8\r\nContent-Length: \(body.count)\r\nCache-Control: no-store\r\nConnection: close\r\n\r\n"
         return Data(header.utf8) + body
@@ -153,7 +151,8 @@ class DirectorServer {
     private func startWSListener() {
         guard let port = NWEndpoint.Port(rawValue: wsPort) else { return }
         let params = NWParameters.tcp
-        let wsOptions = NWProtocolWebSocket.Options()
+        // Room for a whole script in one setText message
+        let wsOptions = RemoteAccess.webSocketOptions(httpPort: httpPort, maximumMessageSize: 1 << 20)
         params.defaultProtocolStack.applicationProtocols.insert(wsOptions, at: 0)
 
         do {
@@ -170,7 +169,7 @@ class DirectorServer {
     }
 
     private func handleWSConnection(_ conn: NWConnection) {
-        guard wsConnections.count < maxConnections else {
+        guard RemoteAccess.admits(conn), wsConnections.count < maxConnections else {
             conn.cancel()
             return
         }
@@ -208,21 +207,19 @@ class DirectorServer {
     }
 
     private func handleIncomingMessage(_ data: Data, from conn: NWConnection) {
-        guard let command = try? JSONDecoder().decode(DirectorCommand.self, from: data) else { return }
+        // First message must carry the access code; nothing else is read before it
         let connId = ObjectIdentifier(conn)
+        guard authenticatedConnections.contains(connId) else {
+            if RemoteAccess.authenticate(data, from: conn) {
+                authenticatedConnections.insert(connId)
+                lastBroadcastState = nil  // so the newcomer gets the current state
+            }
+            return
+        }
+        guard let command = try? JSONDecoder().decode(DirectorCommand.self, from: data) else { return }
 
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
-
-            // First message must be authentication
-            if !self.authenticatedConnections.contains(connId) {
-                if command.type == "auth", command.text == self.authToken {
-                    self.authenticatedConnections.insert(connId)
-                } else {
-                    conn.cancel()
-                }
-                return
-            }
 
             switch command.type {
             case "setText":
@@ -239,14 +236,6 @@ class DirectorServer {
                 break
             }
         }
-    }
-
-    // MARK: - Token Generation
-
-    private static func generateToken() -> String {
-        var bytes = [UInt8](repeating: 0, count: 32)
-        _ = SecRandomCopyBytes(kSecRandomDefault, bytes.count, &bytes)
-        return bytes.map { String(format: "%02x", $0) }.joined()
     }
 
     // MARK: - Broadcasting
@@ -311,7 +300,7 @@ class DirectorServer {
 
     // MARK: - HTML Template
 
-    static func generateHTML(wsPort: UInt16, authToken: String) -> String {
+    static func generateHTML(wsPort: UInt16) -> String {
         """
         <!DOCTYPE html>
         <html lang="en">
@@ -437,20 +426,25 @@ class DirectorServer {
           <button class="reset-btn" onclick="resetAll()">New Script</button>
         </div>
 
+        \(RemoteAccess.codePromptHTML)
+
         <script>
-        const WSP=\(wsPort),host=location.hostname,AUTH_TOKEN='\(authToken)';
+        const WSP=\(wsPort),host=location.hostname;
         let ws,rt,isActive=false,isRunning=false,lastReadCount=0,lockedReadText='';
 
         /* ---- connection ---- */
         function connect(){
           ws=new WebSocket('ws://'+host+':'+WSP);
           ws.onopen=()=>{clearTimeout(rt);
-            ws.send(JSON.stringify({type:'auth',text:AUTH_TOKEN}));
+            ws.send(JSON.stringify({type:'auth',text:accessCode()}));
             document.getElementById('status-dot').className='connected';
             document.getElementById('status-text').textContent='Connected';};
           ws.onmessage=e=>{try{handleState(JSON.parse(e.data))}catch(x){console.error(x)}};
-          ws.onclose=()=>{
+          ws.onclose=e=>{
             document.getElementById('status-dot').className='';
+            if(e.code===1008){
+              document.getElementById('status-text').textContent='Access code needed';
+              askCode();return}
             document.getElementById('status-text').textContent='Reconnecting…';
             rt=setTimeout(connect,1500);};
           ws.onerror=()=>{ws.close()};
