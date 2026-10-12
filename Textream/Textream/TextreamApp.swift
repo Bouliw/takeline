@@ -42,10 +42,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             TextreamService.shared.hideMainWindow()
         }
 
+        Task { await SpeechLocaleSupport.load() }
+
         #if !APP_STORE
-        // Direct-download builds check GitHub for updates. App Store builds are
-        // updated exclusively through the App Store.
-        UpdateChecker.shared.checkForUpdates(silent: true)
+        // Direct-download builds can check GitHub for updates, when the user
+        // turned it on: the app makes no network request otherwise.
+        if NotchSettings.shared.checkForUpdates {
+            UpdateChecker.shared.checkForUpdates(silent: true)
+        }
         #endif
 
         // Start browser server if enabled
