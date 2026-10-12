@@ -133,9 +133,14 @@ class SpeechRecognizer {
     /// A voice command the prompter doesn't handle itself (text size).
     var onCommand: ((VoiceCommand) -> Void)?
 
-    /// Words read and time spent speaking since the last `start`, to learn the reader's pace.
+    /// Words read and time spent speaking since `resetStatistics`, to learn the reader's pace.
     private(set) var wordsRead = 0
     private(set) var speakingTime: TimeInterval = 0
+
+    func resetStatistics() {
+        wordsRead = 0
+        speakingTime = 0
+    }
 
     /// True when recent audio levels indicate the user is actively speaking
     var isSpeaking: Bool {
@@ -241,8 +246,6 @@ class SpeechRecognizer {
         timerWordProgress = 0
         isUserScrolling = false
         isPaused = false
-        wordsRead = 0
-        speakingTime = 0
         retryCount = 0
         error = nil
         startScrollTimer()

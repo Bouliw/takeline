@@ -8,6 +8,7 @@
 import AppKit
 import Combine
 import SwiftUI
+import TakelineCore
 import UniformTypeIdentifiers
 
 class TextreamService: NSObject, ObservableObject {
@@ -45,8 +46,10 @@ class TextreamService: NSObject, ObservableObject {
 
         launchedExternally = true
         hideMainWindow()
+        startSession()
 
         overlayController.show(text: trimmed, hasNextPage: hasNextPage) { [weak self] in
+            self?.finishSession()
             self?.externalDisplayController.dismiss()
             self?.browserServer.hideContent()
             self?.onOverlayDismissed?()
@@ -505,4 +508,67 @@ class TextreamService: NSObject, ObservableObject {
             }
         }
     }
+
+    // MARK: - Sessions
+
+    /// What happens during the current reading: saved for an editing tool at the end.
+    private var session: Session?
+    private var lastSentenceID = -1
+
+    private func startSession() {
+        let recognizer = overlayController.speechRecognizer
+        recognizer.resetStatistics()
+        let title = currentFileURL?.deletingPathExtension().lastPathComponent
+            ?? pages.first.map { $0.split(whereSeparator: \.isWhitespace).prefix(6).joined(separator: " ") }
+            ?? ""
+        let languages = Script(pages.joined(separator: "\n")).languages().compactMap { $0.languageCode?.identifier }
+        let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
+        session = Session(app: "Takeline \(version)", title: title, pages: pages, languages: languages, startedAt: .now)
+        lastSentenceID = -1
+        recognizer.onReading = { [weak self] sentence in
+            guard let self, let id = self.session?.sentenceID(page: self.currentPageIndex, sentence: sentence) else { return }
+            self.lastSentenceID = id
+            self.session?.reading(id, at: .now)
+        }
+        recognizer.onRetake = { [weak self] sentence, trigger, phrase in
+            guard let self, let id = self.session?.sentenceID(page: self.currentPageIndex, sentence: sentence) else { return }
+            self.session?.retake(id, trigger: trigger, phrase: phrase, at: .now)
+        }
+        recognizer.onCommand = { command in
+            let settings = NotchSettings.shared
+            let sizes = FontSizePreset.allCases
+            guard let index = sizes.firstIndex(of: settings.fontSizePreset) else { return }
+            switch command {
+            case .biggerText: settings.fontSizePreset = sizes[min(index + 1, sizes.count - 1)]
+            case .smallerText: settings.fontSizePreset = sizes[max(index - 1, 0)]
+            default: break
+            }
+        }
+    }
+
+    /// Learns the reader's pace and, when enabled, saves the session next to the others.
+    private func finishSession() {
+        guard var session else { return }
+        self.session = nil
+        let settings = NotchSettings.shared
+        let recognizer = overlayController.speechRecognizer
+        if let pace = ReadingPace.updated(settings.wordsPerMinute > 0 ? settings.wordsPerMinute : nil,
+                                          wordsRead: recognizer.wordsRead, speakingTime: recognizer.speakingTime) {
+            settings.wordsPerMinute = pace
+        }
+        session.finish(at: .now, finishedScript: lastSentenceID == session.sentences.count - 1)
+        guard settings.saveSessions, !session.takes.isEmpty else { return }
+        do {
+            let folder = URL(fileURLWithPath: settings.sessionsFolder, isDirectory: true)
+            try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd HH.mm.ss"
+            let name = session.title.replacingOccurrences(of: "/", with: "-").replacingOccurrences(of: ":", with: "-")
+            let file = folder.appending(path: "\(name.isEmpty ? "Session" : name) \(formatter.string(from: session.startedAt)).takeline.json")
+            try session.encoded().write(to: file, options: .atomic)
+        } catch {
+            NSLog("Takeline: could not save the session: \(error.localizedDescription)")
+        }
+    }
+
 }
