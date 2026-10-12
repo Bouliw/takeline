@@ -69,19 +69,28 @@ enum PresentationNotesExtractor {
             throw ExtractionError.extractionFailed("Could not unzip PPTX file.")
         }
 
-        let notesDir = tempDir.appendingPathComponent("ppt/notesSlides")
-        guard fileManager.fileExists(atPath: notesDir.path) else {
-            throw ExtractionError.noNotesFound
+        // Notes file names don't follow the slide order. presentation.xml lists the
+        // slides in order (p:sldIdLst), each r:id points to a slide part, and each
+        // slide's relationships point to its notes part. Slides without notes are skipped.
+        let pptDir = tempDir.appendingPathComponent("ppt")
+        let slides = relationships(
+            in: pptDir.appendingPathComponent("_rels/presentation.xml.rels"),
+            partDir: pptDir,
+            root: tempDir
+        )
+        let noteFiles: [URL] = XMLAttributesParser.attributes(
+            of: "sldId",
+            in: pptDir.appendingPathComponent("presentation.xml")
+        ).compactMap { slideID in
+            guard let relationshipID = slideID.first(where: { $0.key.hasSuffix(":id") })?.value,
+                  let slide = slides.first(where: { $0.id == relationshipID })?.target else { return nil }
+            let slideDir = slide.deletingLastPathComponent()
+            return relationships(
+                in: slideDir.appendingPathComponent("_rels/\(slide.lastPathComponent).rels"),
+                partDir: slideDir,
+                root: tempDir
+            ).first(where: { $0.type.hasSuffix("/notesSlide") })?.target
         }
-
-        let noteFiles = try fileManager.contentsOfDirectory(at: notesDir, includingPropertiesForKeys: nil)
-            .filter { $0.pathExtension == "xml" && $0.lastPathComponent.hasPrefix("notesSlide") }
-            .sorted { file1, file2 in
-                // Sort by slide number: notesSlide1.xml, notesSlide2.xml, ...
-                let n1 = extractNumber(from: file1.lastPathComponent) ?? 0
-                let n2 = extractNumber(from: file2.lastPathComponent) ?? 0
-                return n1 < n2
-            }
 
         var pages: [String] = []
 
@@ -91,10 +100,10 @@ enum PresentationNotesExtractor {
             pages.append(text)
         }
 
-        // Filter out empty slides and slides that only have the slide number placeholder
+        // Filter out empty slides (the parser already drops the slide number placeholder)
         pages = pages.compactMap { page in
             let trimmed = page.trimmingCharacters(in: .whitespacesAndNewlines)
-            guard !trimmed.isEmpty && Int(trimmed) == nil else { return nil }
+            guard !trimmed.isEmpty else { return nil }
             return trimmed
         }
 
@@ -105,9 +114,25 @@ enum PresentationNotesExtractor {
         return pages
     }
 
-    private static func extractNumber(from filename: String) -> Int? {
-        let digits = filename.filter { $0.isNumber }
-        return Int(digits)
+    private struct Relationship {
+        let id: String
+        let type: String
+        let target: URL
+    }
+
+    /// Reads a .rels part. Relative targets resolve against the folder of the part the
+    /// relationships belong to; targets outside the unzipped archive are ignored.
+    private static func relationships(in relsFile: URL, partDir: URL, root: URL) -> [Relationship] {
+        let rootPath = root.standardizedFileURL.path + "/"
+        return XMLAttributesParser.attributes(of: "Relationship", in: relsFile).compactMap { attributes in
+            guard let id = attributes["Id"], let target = attributes["Target"] else { return nil }
+            let url = (target.hasPrefix("/")
+                ? root.appendingPathComponent(String(target.dropFirst()))
+                : partDir.appendingPathComponent(target)
+            ).standardizedFileURL
+            guard url.path.hasPrefix(rootPath) else { return nil }
+            return Relationship(id: id, type: attributes["Type"] ?? "", target: url)
+        }
     }
 
     private static func parsePPTXNoteXML(data: Data) -> String {
@@ -205,6 +230,34 @@ private class PPTXNoteXMLParser: NSObject, XMLParserDelegate {
         if elementName.hasSuffix(":sp") || elementName == "sp" {
             skipPlaceholder = false
             currentPlaceholderType = nil
+        }
+    }
+}
+
+// MARK: - Element Attributes Parser
+
+/// Collects the attributes of every element with a given name, ignoring its namespace prefix.
+private class XMLAttributesParser: NSObject, XMLParserDelegate {
+    private let name: String
+    private var found: [[String: String]] = []
+
+    private init(name: String) {
+        self.name = name
+    }
+
+    static func attributes(of name: String, in url: URL) -> [[String: String]] {
+        guard let parser = XMLParser(contentsOf: url) else { return [] }
+        let collector = XMLAttributesParser(name: name)
+        parser.delegate = collector
+        parser.parse()
+        return collector.found
+    }
+
+    func parser(_ parser: XMLParser, didStartElement elementName: String,
+                namespaceURI: String?, qualifiedName: String?,
+                attributes: [String: String]) {
+        if elementName == name || elementName.hasSuffix(":" + name) {
+            found.append(attributes)
         }
     }
 }
