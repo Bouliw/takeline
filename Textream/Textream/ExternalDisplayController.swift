@@ -258,6 +258,9 @@ struct ExternalDisplayView: View {
                                 .clipShape(Circle())
                         }
                         .buttonStyle(.plain)
+                        .accessibilityLabel(speechRecognizer.isListening
+                            ? String(localized: "Mute microphone")
+                            : String(localized: "Unmute microphone"))
                     }
                 }
                 .padding(.horizontal, hPad)

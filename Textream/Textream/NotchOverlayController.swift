@@ -587,6 +587,7 @@ struct StopButtonView: View {
                 .clipShape(Circle())
         }
         .buttonStyle(.plain)
+        .accessibilityLabel(String(localized: "Stop"))
     }
 }
 
@@ -942,6 +943,10 @@ struct NotchOverlayView: View {
                                     content.showPagePicker = true
                                 }
                         )
+                        .accessibilityLabel(String(localized: "Next page"))
+                        .accessibilityAction(named: String(localized: "Pages")) {
+                            content.showPagePicker = true
+                        }
                     } else {
                         Button {
                             content.jumpToPageIndex = 0
@@ -960,6 +965,10 @@ struct NotchOverlayView: View {
                                     content.showPagePicker = true
                                 }
                         )
+                        .accessibilityLabel(String(localized: "First page"))
+                        .accessibilityAction(named: String(localized: "Pages")) {
+                            content.showPagePicker = true
+                        }
                     }
                 }
 
@@ -977,6 +986,7 @@ struct NotchOverlayView: View {
                     }
                     .buttonStyle(.plain)
                 .help(speechRecognizer.isPaused ? String(localized: "Resume") : String(localized: "Pause"))
+                .accessibilityLabel(speechRecognizer.isPaused ? String(localized: "Resume") : String(localized: "Pause"))
                 }
                 if listeningMode != .classic {
                     Button {
@@ -1002,6 +1012,9 @@ struct NotchOverlayView: View {
                         .clipShape(Circle())
                     }
                     .buttonStyle(.plain)
+                    .accessibilityLabel(speechRecognizer.isListening || speechRecognizer.isStarting
+                        ? String(localized: "Mute microphone")
+                        : String(localized: "Unmute microphone"))
                 }
 
                 Button {
@@ -1016,6 +1029,7 @@ struct NotchOverlayView: View {
                         .clipShape(Circle())
                 }
                 .buttonStyle(.plain)
+                .accessibilityLabel(String(localized: "Stop"))
             }
             .frame(height: 24)
             .padding(.horizontal, 12)
@@ -1384,6 +1398,10 @@ struct FloatingOverlayView: View {
                                     content.showPagePicker = true
                                 }
                         )
+                        .accessibilityLabel(String(localized: "Next page"))
+                        .accessibilityAction(named: String(localized: "Pages")) {
+                            content.showPagePicker = true
+                        }
                     } else {
                         Button {
                             content.jumpToPageIndex = 0
@@ -1402,6 +1420,10 @@ struct FloatingOverlayView: View {
                                     content.showPagePicker = true
                                 }
                         )
+                        .accessibilityLabel(String(localized: "First page"))
+                        .accessibilityAction(named: String(localized: "Pages")) {
+                            content.showPagePicker = true
+                        }
                     }
                 }
 
@@ -1420,6 +1442,7 @@ struct FloatingOverlayView: View {
                         }
                         .buttonStyle(.plain)
                     .help(speechRecognizer.isPaused ? String(localized: "Resume") : String(localized: "Pause"))
+                    .accessibilityLabel(speechRecognizer.isPaused ? String(localized: "Resume") : String(localized: "Pause"))
                     }
                     if listeningMode != .classic {
                         Button {
@@ -1445,6 +1468,9 @@ struct FloatingOverlayView: View {
                             .clipShape(Circle())
                         }
                         .buttonStyle(.plain)
+                        .accessibilityLabel(speechRecognizer.isListening || speechRecognizer.isStarting
+                            ? String(localized: "Mute microphone")
+                            : String(localized: "Unmute microphone"))
                     }
 
                     Button {
@@ -1459,6 +1485,7 @@ struct FloatingOverlayView: View {
                             .clipShape(Circle())
                     }
                     .buttonStyle(.plain)
+                    .accessibilityLabel(String(localized: "Stop"))
                 }
             }
             .frame(height: 24)
