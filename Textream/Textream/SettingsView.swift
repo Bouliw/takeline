@@ -355,14 +355,14 @@ enum SettingsTab: String, CaseIterable, Identifiable {
 
     var label: String {
         switch self {
-        case .appearance: return "Appearance"
-        case .guidance:   return "Guidance"
+        case .appearance: return String(localized: "Appearance")
+        case .guidance:   return String(localized: "Guidance")
         case .voice:      return String(localized: "Voice")
-        case .reading:    return "Reading"
-        case .teleprompter: return "Teleprompter"
-        case .external:   return "External"
-        case .browser:    return "Remote"
-        case .director:   return "Director"
+        case .reading:    return String(localized: "Reading")
+        case .teleprompter: return String(localized: "Teleprompter")
+        case .external:   return String(localized: "External")
+        case .browser:    return String(localized: "Remote")
+        case .director:   return String(localized: "Director")
         case .advanced:   return String(localized: "Advanced")
         }
     }
