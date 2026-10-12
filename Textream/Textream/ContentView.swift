@@ -859,7 +859,7 @@ struct AboutView: View {
 
             // App name & version
             VStack(spacing: 4) {
-                Text("Textream")
+                Text("Takeline")
                     .font(.system(size: 20, weight: .bold))
                 Text("Version \(appVersion)")
                     .font(.system(size: 12))
@@ -867,7 +867,7 @@ struct AboutView: View {
             }
 
             // Description
-            Text("A free, open-source teleprompter that highlights your script in real-time as you speak.")
+            Text("A free, open-source teleprompter that follows your voice, in French and English, entirely on your Mac.")
                 .font(.system(size: 13))
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
@@ -875,7 +875,7 @@ struct AboutView: View {
 
             // Links
             HStack(spacing: 12) {
-                Link(destination: URL(string: "https://github.com/f/textream")!) {
+                Link(destination: URL(string: "https://github.com/Bouliw/takeline")!) {
                     HStack(spacing: 5) {
                         Image(systemName: "chevron.left.forwardslash.chevron.right")
                             .font(.system(size: 11, weight: .semibold))
@@ -888,43 +888,12 @@ struct AboutView: View {
                     .background(Color.primary.opacity(0.08))
                     .clipShape(Capsule())
                 }
-
-                Link(destination: URL(string: "https://textream.net/privacy.html")!) {
-                    HStack(spacing: 5) {
-                        Image(systemName: "hand.raised.fill")
-                            .font(.system(size: 11, weight: .semibold))
-                        Text("Privacy")
-                            .font(.system(size: 12, weight: .medium))
-                    }
-                    .foregroundStyle(.primary)
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 7)
-                    .background(Color.primary.opacity(0.08))
-                    .clipShape(Capsule())
-                }
-
-                #if !APP_STORE
-                Link(destination: URL(string: "https://donate.stripe.com/aFa8wO4NF2S96jDfn4dMI09")!) {
-                    HStack(spacing: 5) {
-                        Image(systemName: "heart.fill")
-                            .font(.system(size: 11, weight: .semibold))
-                            .foregroundStyle(.pink)
-                        Text("Donate")
-                            .font(.system(size: 12, weight: .medium))
-                    }
-                    .foregroundStyle(.primary)
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 7)
-                    .background(Color.pink.opacity(0.1))
-                    .clipShape(Capsule())
-                }
-                #endif
             }
 
             Divider().padding(.horizontal, 20)
 
             VStack(spacing: 4) {
-                Text("Made by Fatih Kadir Akin")
+                Link("Based on Textream by Fatih Kadir Akın", destination: URL(string: "https://github.com/f/textream")!)
                     .font(.system(size: 11, weight: .medium))
                     .foregroundStyle(.secondary)
                 Text("Original idea by Semih Kışlar")
