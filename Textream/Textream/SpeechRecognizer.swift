@@ -123,8 +123,9 @@ class SpeechRecognizer {
     var isUserScrolling: Bool = false
     /// Auto-scroll position in words (classic and voice-activated modes).
     var timerWordProgress: Double = 0
-    /// When the last retake was noticed, for a brief sign in the prompter.
-    var lastRetakeAt: Date?
+    /// A retake was just noticed: the prompter shows a brief sign.
+    var showsRetake: Bool = false
+    private var retakeSignGeneration = 0
 
     /// The reader is on this sentence of the page (word tracking).
     var onReading: ((Int) -> Void)?
@@ -598,7 +599,13 @@ class SpeechRecognizer {
     }
 
     private func noteRetake(sentence: Int, trigger: Session.Retake.Trigger, phrase: String?) {
-        lastRetakeAt = .now
+        showsRetake = true
+        retakeSignGeneration &+= 1
+        let generation = retakeSignGeneration
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+            guard let self, self.retakeSignGeneration == generation else { return }
+            self.showsRetake = false
+        }
         onRetake?(sentence, trigger, phrase)
     }
 

@@ -230,7 +230,12 @@ struct ExternalDisplayView: View {
                     )
                     .frame(width: 240, height: 32)
 
-                    if listeningMode == .wordTracking,
+                    if speechRecognizer.showsRetake {
+                        Label(String(localized: "Retake"), systemImage: "arrow.counterclockwise")
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundStyle(.yellow.opacity(0.9))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    } else if listeningMode == .wordTracking,
                        NotchSettings.shared.showLastSpokenWords {
                         Text(speechRecognizer.lastSpokenText.split(separator: " ").suffix(5).joined(separator: " "))
                             .font(.system(size: 18, weight: .medium))

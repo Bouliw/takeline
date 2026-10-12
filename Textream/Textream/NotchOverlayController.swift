@@ -912,6 +912,12 @@ struct NotchOverlayView: View {
                         .truncationMode(.tail)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .help(error)
+                } else if speechRecognizer.showsRetake {
+                    Label(String(localized: "Retake"), systemImage: "arrow.counterclockwise")
+                        .font(.system(size: 11, weight: .semibold))
+                        .foregroundStyle(.yellow.opacity(0.9))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .transition(.opacity)
                 } else if listeningMode == .wordTracking,
                           NotchSettings.shared.showLastSpokenWords {
                     Text(speechRecognizer.lastSpokenText.split(separator: " ").suffix(3).joined(separator: " "))
@@ -1367,6 +1373,12 @@ struct FloatingOverlayView: View {
                         .truncationMode(.tail)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .help(error)
+                } else if speechRecognizer.showsRetake {
+                    Label(String(localized: "Retake"), systemImage: "arrow.counterclockwise")
+                        .font(.system(size: 11, weight: .semibold))
+                        .foregroundStyle(.yellow.opacity(0.9))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .transition(.opacity)
                 } else if listeningMode == .wordTracking,
                           NotchSettings.shared.showLastSpokenWords {
                     Text(speechRecognizer.lastSpokenText.split(separator: " ").suffix(3).joined(separator: " "))
