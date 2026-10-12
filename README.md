@@ -53,7 +53,7 @@ Enable it in **Settings → Remote** and scan the QR code: the prompter opens in
 
 ### Director mode
 
-Someone else writes, edits and sends the script from a browser while you read. The director's script never replaces yours: your pages and your file stay as they were.
+Someone else writes, edits and sends the script from a browser while you read. The director's script never replaces yours: your pages and your file stay as they were. To build your own director client, see [the API](docs/director-api.md).
 
 ### Files
 
