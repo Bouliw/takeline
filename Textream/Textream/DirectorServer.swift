@@ -62,6 +62,8 @@ class DirectorServer {
     var wsPort: UInt16 { httpPort + 1 }
     var isRunning: Bool { httpListener != nil }
     var connectedClients: Int { wsConnections.count }
+    /// The link for the QR code, with the access code; nil without a network address.
+    var shareURL: String? { BrowserServer.localIPAddress().map { RemoteAccess.shareURL(host: $0, port: httpPort) } }
 
     // MARK: - Lifecycle
 

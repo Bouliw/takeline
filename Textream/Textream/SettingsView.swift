@@ -1198,7 +1198,7 @@ struct SettingsView: View {
             if settings.browserServerEnabled {
                 Divider()
 
-                let url = "http://\(localIP):\(settings.browserServerPort)"
+                let url = TextreamService.shared.browserServer.shareURL ?? RemoteAccess.shareURL(host: localIP, port: settings.browserServerPort)
 
                 if let qrImage = generateQRCode(from: url) {
                     HStack {
@@ -1312,7 +1312,7 @@ struct SettingsView: View {
             if settings.directorModeEnabled {
                 Divider()
 
-                let url = "http://\(directorLocalIP):\(settings.directorServerPort)"
+                let url = TextreamService.shared.directorServer.shareURL ?? RemoteAccess.shareURL(host: directorLocalIP, port: settings.directorServerPort)
 
                 if let qrImage = generateQRCode(from: url) {
                     HStack {

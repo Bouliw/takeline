@@ -473,9 +473,7 @@ Happy recording! [wave]
                 .font(.system(size: 13))
                 .foregroundStyle(.secondary)
 
-            if let ip = BrowserServer.localIPAddress() {
-                let url = "http://\(ip):\(NotchSettings.shared.directorServerPort)"
-
+            if let url = service.directorServer.shareURL {
                 if let qrImage = generateDirectorQRCode(from: url) {
                     Image(nsImage: qrImage)
                         .interpolation(.none)
