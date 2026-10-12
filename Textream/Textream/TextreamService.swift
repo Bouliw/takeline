@@ -249,7 +249,7 @@ class TextreamService: NSObject, ObservableObject {
             .init(filenameExtension: "textream")!,
             .init(filenameExtension: "key")!,
             .init(filenameExtension: "pptx")!,
-        ]
+        ] + ScriptImport.extensions.compactMap { UTType(filenameExtension: $0) }
         panel.allowsMultipleSelection = false
         panel.canChooseDirectories = false
         panel.directoryURL = currentFileURL?.deletingLastPathComponent()
@@ -266,6 +266,8 @@ class TextreamService: NSObject, ObservableObject {
                 alert.runModal()
             } else if ext == "pptx" {
                 self?.importPresentation(from: url)
+            } else if ScriptImport.extensions.contains(ext) {
+                self?.importScript(from: url)
             } else {
                 self?.openFileAtURL(url)
             }
@@ -292,6 +294,24 @@ class TextreamService: NSObject, ObservableObject {
                     alert.runModal()
                 }
             }
+        }
+    }
+
+    /// Opens a .txt, .md or .docx file as a new, untitled script.
+    func importScript(from url: URL) {
+        do {
+            let imported = try ScriptImport.pages(from: url)
+            pages = imported
+            savedPages = imported
+            currentPageIndex = 0
+            readPages.removeAll()
+            currentFileURL = nil
+            rememberDocumentURL(url)
+        } catch {
+            let alert = NSAlert()
+            alert.messageText = String(localized: "Import Error")
+            alert.informativeText = error.localizedDescription
+            alert.runModal()
         }
     }
 

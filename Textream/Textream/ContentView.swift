@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import TakelineCore
 import UniformTypeIdentifiers
 import CoreImage.CIFilterBuiltins
 
@@ -380,7 +381,7 @@ Happy presenting! [wave]
                     Image(systemName: "doc.text")
                         .font(.system(size: 28, weight: .light))
                         .foregroundStyle(Color.accentColor)
-                    Text("Drop PowerPoint (.pptx) file")
+                    Text("Drop a script: PowerPoint, Word, Markdown or text")
                         .font(.system(size: 13, weight: .medium))
                         .foregroundStyle(.primary)
                     Text("For Keynote or Google Slides,\nexport as PPTX first.")
@@ -412,10 +413,18 @@ Happy presenting! [wave]
                             }
                             return
                         }
+                        if ScriptImport.extensions.contains(ext) {
+                            DispatchQueue.main.async {
+                                guard service.confirmDiscardIfNeeded() else { return }
+                                if isRecording { stopRecording() }
+                                service.importScript(from: url)
+                            }
+                            return
+                        }
                         guard ext == "pptx" else {
                             DispatchQueue.main.async {
-                                dropAlertTitle = "Import Error"
-                                dropError = "Unsupported file. Drop a PowerPoint (.pptx) file."
+                                dropAlertTitle = String(localized: "Import Error")
+                                dropError = String(localized: "Unsupported file. Drop a PowerPoint (.pptx), Word (.docx), Markdown (.md) or text (.txt) file.")
                             }
                             return
                         }
