@@ -599,6 +599,7 @@ struct WordFlowLayout: View {
 
     // Simple layout cache to avoid re-measuring words on every highlight update
     private static var _cacheKey: String = ""
+    private static var _cachedWords: [String] = []
     private static var _cachedItems: [WordItem] = []
     private static var _cachedLines: [[WordItem]] = []
     private static var _cachedParagraphPrefixCounts: [Int] = []
@@ -607,9 +608,8 @@ struct WordFlowLayout: View {
         let paragraphKey = paragraphBreakBeforeWordIndices.sorted()
             .map(String.init)
             .joined(separator: ",")
-        let key = "\(words.count)|\(words.first ?? "")|\(words.last ?? "")|"
-            + "\(font.fontName)|\(font.pointSize)|\(Int(containerWidth))|\(paragraphKey)"
-        if key == Self._cacheKey {
+        let key = "\(font.fontName)|\(font.pointSize)|\(containerWidth)|\(paragraphKey)"
+        if key == Self._cacheKey && words == Self._cachedWords {
             return (Self._cachedItems, Self._cachedLines, Self._cachedParagraphPrefixCounts)
         }
         let items = buildItems()
@@ -624,6 +624,7 @@ struct WordFlowLayout: View {
             )
         }
         Self._cacheKey = key
+        Self._cachedWords = words
         Self._cachedItems = items
         Self._cachedLines = lines
         Self._cachedParagraphPrefixCounts = paragraphPrefixCounts
