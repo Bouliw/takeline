@@ -234,7 +234,7 @@ class TextreamService: NSObject, ObservableObject {
             return true
         } catch {
             let alert = NSAlert()
-            alert.messageText = "Failed to save file"
+            alert.messageText = String(localized: "Failed to save file")
             alert.informativeText = error.localizedDescription
             alert.runModal()
             return false
@@ -264,8 +264,8 @@ class TextreamService: NSObject, ObservableObject {
             let ext = url.pathExtension.lowercased()
             if ext == "key" {
                 let alert = NSAlert()
-                alert.messageText = "Keynote files can't be imported directly"
-                alert.informativeText = "Please export your Keynote presentation as PowerPoint (.pptx) first:\n\nIn Keynote: File → Export To → PowerPoint"
+                alert.messageText = String(localized: "Keynote files can't be imported directly")
+                alert.informativeText = String(localized: "Please export your Keynote presentation as PowerPoint (.pptx) first:\n\nIn Keynote: File → Export To → PowerPoint")
                 alert.alertStyle = .informational
                 alert.runModal()
             } else if ext == "pptx" {
@@ -293,7 +293,7 @@ class TextreamService: NSObject, ObservableObject {
             } catch {
                 DispatchQueue.main.async {
                     let alert = NSAlert()
-                    alert.messageText = "Import Error"
+                    alert.messageText = String(localized: "Import Error")
                     alert.informativeText = error.localizedDescription
                     alert.runModal()
                 }
@@ -325,11 +325,11 @@ class TextreamService: NSObject, ObservableObject {
         guard hasUnsavedChanges else { return true }
 
         let alert = NSAlert()
-        alert.messageText = "You have unsaved changes"
+        alert.messageText = String(localized: "You have unsaved changes")
         alert.informativeText = String(localized: "Your changes will be lost if you don't save them.")
-        alert.addButton(withTitle: "Save")
-        alert.addButton(withTitle: "Discard")
-        alert.addButton(withTitle: "Cancel")
+        alert.addButton(withTitle: String(localized: "Save"))
+        alert.addButton(withTitle: String(localized: "Discard"))
+        alert.addButton(withTitle: String(localized: "Cancel"))
         alert.alertStyle = .warning
 
         let response = alert.runModal()
@@ -357,7 +357,7 @@ class TextreamService: NSObject, ObservableObject {
             NSDocumentController.shared.noteNewRecentDocumentURL(url)
         } catch {
             let alert = NSAlert()
-            alert.messageText = "Failed to open file"
+            alert.messageText = String(localized: "Failed to open file")
             alert.informativeText = error.localizedDescription
             alert.runModal()
         }

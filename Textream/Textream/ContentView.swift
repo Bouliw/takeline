@@ -19,7 +19,7 @@ struct ContentView: View {
     @State private var editorCaretPosition: Int = 0
     @State private var isDroppingPresentation = false
     @State private var dropError: String?
-    @State private var dropAlertTitle: String = "Import Error"
+    @State private var dropAlertTitle: String = String(localized: "Import Error")
     @State private var showSettings = false
     @State private var showAbout = false
     @State private var languageSuggestion: SpeechLanguageSuggestion?
@@ -427,8 +427,8 @@ Happy recording! [wave]
                         let ext = url.pathExtension.lowercased()
                         if ext == "key" {
                             DispatchQueue.main.async {
-                                dropAlertTitle = "Conversion Required"
-                                dropError = "Keynote files can't be imported directly. Please export your Keynote presentation as PowerPoint (.pptx) first, then drop the exported file here."
+                                dropAlertTitle = String(localized: "Conversion Required")
+                                dropError = String(localized: "Keynote files can't be imported directly. Please export your Keynote presentation as PowerPoint (.pptx) first, then drop the exported file here.")
                             }
                             return
                         }

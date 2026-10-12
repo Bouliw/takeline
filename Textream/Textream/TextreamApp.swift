@@ -167,7 +167,7 @@ struct TextreamApp: App {
 
         .commands {
             CommandGroup(replacing: .appInfo) {
-                Button("About Textream") {
+                Button("About Takeline") {
                     NotificationCenter.default.post(name: .openAbout, object: nil)
                 }
                 #if !APP_STORE
@@ -210,8 +210,8 @@ struct TextreamApp: App {
             }
             CommandGroup(replacing: .windowArrangement) { }
             CommandGroup(replacing: .help) {
-                Button("Textream Help") {
-                    if let url = URL(string: "https://github.com/f/textream") {
+                Button("Takeline Help") {
+                    if let url = URL(string: "https://github.com/Bouliw/takeline#readme") {
                         NSWorkspace.shared.open(url)
                     }
                 }

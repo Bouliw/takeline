@@ -18,11 +18,11 @@ enum PresentationNotesExtractor {
         var errorDescription: String? {
             switch self {
             case .unsupportedFormat:
-                return "Unsupported file format. Please drop a .pptx or .key file."
+                return String(localized: "Unsupported file format. Please drop a .pptx or .key file.")
             case .extractionFailed(let detail):
-                return "Failed to extract notes: \(detail)"
+                return String(localized: "Failed to extract notes: \(detail)")
             case .noNotesFound:
-                return "No presenter notes found in this presentation."
+                return String(localized: "No presenter notes found in this presentation.")
             }
         }
     }
