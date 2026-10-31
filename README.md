@@ -12,6 +12,8 @@
   Based on <a href="https://github.com/f/textream">Textream</a> by Fatih Kadir Akın.
 </p>
 
+<p align="center"><a href="https://github.com/Bouliw/takeline/actions/workflows/tests.yml"><img src="https://github.com/Bouliw/takeline/actions/workflows/tests.yml/badge.svg" alt="Tests"></a></p>
+
 ---
 
 Takeline shows your script right below the MacBook notch, in a floating window, fullscreen or on another display, and highlights each word as you say it. It keeps everything Textream does and adds what you need to record videos in one go:

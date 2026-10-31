@@ -175,7 +175,12 @@ public actor CueJudge {
             What the speaker just said: \(cue.utterance.joined(separator: " "))
             Phrase spotted: \(cue.phrase)
             """
-        let verdict = try await session.respond(to: prompt, generating: Verdict.self, options: GenerationOptions(samplingMode: .greedy)).content
+        #if compiler(>=6.4)
+        let options = GenerationOptions(samplingMode: .greedy)
+        #else
+        let options = GenerationOptions(sampling: .greedy)  // the label before the macOS 27 SDK
+        #endif
+        let verdict = try await session.respond(to: prompt, generating: Verdict.self, options: options).content
         switch verdict.kind {
         case .speech: return nil
         case .retake: return .retake
