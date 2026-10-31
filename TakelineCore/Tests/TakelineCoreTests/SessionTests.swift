@@ -27,6 +27,30 @@ import Testing
         #expect(decoded == session)
     }
 
+    @Test func endsTakesOnJumpsBackAndKeepsLateRetakesApart() {
+        let start = Date(timeIntervalSince1970: 1_000)
+        var session = Session(app: "", title: "", pages: [bakery], languages: [], startedAt: start)
+        session.reading(2, at: start)
+        session.reading(1, at: start.addingTimeInterval(5))
+        session.retake(1, trigger: .phrase, at: start.addingTimeInterval(6))
+        session.retake(1, trigger: .reread, at: start.addingTimeInterval(20))
+        session.reading(1, at: start.addingTimeInterval(20))
+        session.finish(at: start.addingTimeInterval(30), finishedScript: true)
+
+        #expect(session.takes.map(\.status) == [.abandoned, .abandoned, .completed])
+        #expect(session.retakes.map(\.trigger) == [.phrase, .reread])
+    }
+
+    /// Editors such as Roughcut read session files as docs/session-format.md describes them.
+    @Test func writesTheDocumentedFormat() throws {
+        let doc = try String(contentsOf: URL(filePath: "../../../docs/session-format.md", relativeTo: URL(filePath: #filePath)), encoding: .utf8)
+        let example = Data(try #require(doc.components(separatedBy: "```json\n").dropFirst().first?.components(separatedBy: "```").first).utf8)
+        let session = try Session.decoded(from: example)
+        #expect(session.format == "takeline.session" && session.version == 1)
+        let written = try JSONSerialization.jsonObject(with: session.encoded()) as? NSDictionary
+        #expect(written == (try JSONSerialization.jsonObject(with: example) as? NSDictionary))
+    }
+
     @Test func numbersSentencesAcrossPages() {
         let session = Session(app: "", title: "", pages: ["One. Two.", "Three."], languages: [], startedAt: .now)
         #expect(session.sentenceID(page: 1, sentence: 0) == 2)

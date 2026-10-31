@@ -24,6 +24,15 @@ import AppKit
         #expect(pages == ["Intro\nHello world, see the site.\nfirst point", "Second page with code."])
     }
 
+    @Test func readsTextFilesFromWindowsToo() throws {
+        let utf8 = FileManager.default.temporaryDirectory.appending(path: "takeline-test.txt")
+        try Data("\u{FEFF}Première page.\r\nDeuxième ligne.\u{0C}\r\nPage deux.".utf8).write(to: utf8)
+        #expect(try ScriptImport.pages(from: utf8) == ["Première page.\nDeuxième ligne.", "Page deux."])
+        let utf16 = FileManager.default.temporaryDirectory.appending(path: "takeline-test-utf16.txt")
+        try #require("Été".data(using: .utf16)).write(to: utf16)  // with a byte order mark, as Notepad saves "Unicode"
+        #expect(try ScriptImport.pages(from: utf16) == ["Été"])
+    }
+
     @Test func readsWordFiles() throws {
         #if canImport(AppKit)
         let url = FileManager.default.temporaryDirectory.appending(path: "takeline-test.docx")
