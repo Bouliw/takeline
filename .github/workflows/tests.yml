@@ -1,0 +1,24 @@
+# Runs the core tests on every push and pull request, on a Mac: script splitting, word tracking, retake and
+# command phrases, imports and session files; then builds the Mac app, unsigned.
+# No microphone, speech model or Apple Intelligence needed.
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: macos-26
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Core tests
+        run: swift test --package-path TakelineCore
+      - name: Mac app builds
+        run: xcodebuild build -project Textream/Textream.xcodeproj -scheme Textream -configuration Debug -destination 'platform=macOS' CODE_SIGNING_ALLOWED=NO -quiet
