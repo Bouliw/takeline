@@ -110,6 +110,19 @@ takeline://read?text=Hello%20world
 
 Takeline is a fork of [Textream](https://github.com/f/textream) by Fatih Kadir Akın, after an original idea by Semih Kışlar. The OpenDyslexic font is licensed under the SIL Open Font License.
 
+## More tools by Bouliw
+
+- [Roughcut](https://github.com/Bouliw/fcpxml-roughcut): Turns talking-head footage into a rough cut you finish in Final Cut Pro.
+- [Vigie](https://github.com/Bouliw/vigie): Sigma detection on Windows, Linux and macOS logs, with a report mapped to MITRE ATT&CK.
+- [Earshot](https://github.com/Bouliw/earshot): Live, on-device transcription of any app on your Mac, with speaker names.
+- [doc-indexer-macos](https://github.com/Bouliw/doc-indexer-macos): On-device OCR for a folder of paperwork, ready for grep or an AI agent.
+- [Lantern](https://github.com/Bouliw/lantern): A stylish Jellyfin client for desktop, LG webOS TVs and phones.
+- [Boulito](https://github.com/Bouliw/boulito): A voice assistant that runs 100% on your Mac.
+- [trackmend](https://github.com/Bouliw/trackmend): Repairs a macOS Music library full of local files.
+- [mac-toolkit](https://github.com/Bouliw/mac-toolkit): Small tools I use every day on my Mac.
+
+All projects: [bouliw.github.io](https://bouliw.github.io)
+
 ## License
 
 MIT, see [LICENSE](LICENSE).
