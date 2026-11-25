@@ -12,7 +12,7 @@
   Based on <a href="https://github.com/f/textream">Textream</a> by Fatih Kadir Akın.
 </p>
 
-<p align="center"><a href="https://github.com/Bouliw/takeline/actions/workflows/tests.yml"><img src="https://github.com/Bouliw/takeline/actions/workflows/tests.yml/badge.svg" alt="Tests"></a></p>
+<p align="center"><a href="https://github.com/Bouliw/takeline/actions/workflows/tests.yml"><img src="https://github.com/Bouliw/takeline/actions/workflows/tests.yml/badge.svg" alt="Tests"></a> <a href="https://github.com/Bouliw/takeline/releases/latest"><img src="https://img.shields.io/github/v/release/Bouliw/takeline?sort=semver" alt="Release"></a> <a href="LICENSE"><img src="https://img.shields.io/github/license/Bouliw/takeline" alt="License"></a></p>
 
 ---
 
